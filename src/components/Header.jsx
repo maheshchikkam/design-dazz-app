@@ -5,7 +5,7 @@ import Logo from "./Logo";
 export default function Header() {
   return (
     <>
-      <div className="hidden md:h-[130px] md:flex">
+      <div className="hidden sm:h-[130px] sm:flex">
         <div className="h-full w-[30%] flex flex-row items-center justify-center bg-primary text-white p-4">
           <div>
             <Logo />
@@ -48,6 +48,17 @@ export default function Header() {
           >
             Contact
           </NavLink>
+        </div>
+      </div>
+      <div className="flex h-[80px] xs:h-[80px] sm:hidden">
+        <div className="h-full w-[100%] flex flex-row items-center bg-primary text-white p-4">
+          <div>
+            <Logo />
+          </div>
+          <div className="flex flex-col items-start ml-4 text-sm font-medium">
+            <span>DESIGN</span>
+            <span>DAZZ</span>
+          </div>
         </div>
       </div>
     </>
