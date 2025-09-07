@@ -12,7 +12,7 @@ export default function Header() {
     <>
       {/* Desktop Header */}
       <div className="hidden sm:h-[130px] sm:flex">
-        <div className="h-full w-[30%] flex flex-row items-center justify-center bg-primary text-white p-4">
+        <div className="h-full w-[30%] flex flex-row items-center justify-start bg-primary text-white pl-25">
           <div>
             <Logo />
           </div>
