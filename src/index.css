@@ -1,3 +1,4 @@
+@import url("https://fonts.cdnfonts.com/css/futura-lt");
 @import "tailwindcss";
 
 @theme {
@@ -8,4 +9,8 @@
 
 .text-brown {
   color: var(--font-color-brown);
+}
+
+body {
+  font-family: "Futura LT", sans-serif;
 }
