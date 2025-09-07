@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <>
-      <div className="bg-secondary flex">
+    <div className="bg-secondary">
+      <div className="flex">
         <div className="w-[30%] bg-primary">
           <div className="flex flex-row items-center justify-center bg-primary text-white">
             <div className="flex flex-col mt-50 ml-5">
@@ -18,6 +18,20 @@ export default function Home() {
           />
         </div>
       </div>
-    </>
+      <div className="flex mt-25">
+        <div className="flex-row justify-center items-center">
+          <div className="text-center text-5xl text-brown">About</div>
+          <div className="text-center text-xl pt-10 text-brown">
+            I'm a paragraph. Click here to add your own text and edit me. It's
+            easy.
+          </div>
+          <div className="text-center text-xl mx-100 text-brown">
+            Just click “Edit Text” or double click me to add your own content
+            and make changes to the font. I'm a great place for you to tell a
+            story and let your users know a little more about you.
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

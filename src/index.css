@@ -3,5 +3,9 @@
 @theme {
   --color-primary: #365150;
   --color-secondary: #f9f5f3;
-  --text-primary-color: #40251b;
+  --font-color-brown: #40251b;
+}
+
+.text-brown {
+  color: var(--font-color-brown);
 }
