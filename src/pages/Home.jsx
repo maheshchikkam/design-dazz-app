@@ -32,6 +32,17 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div>
+        <img
+          src="https://static.wixstatic.com/media/c837a6_7c584dbe8daf4cbfab69251295b930fb~mv2.jpg/v1/fill/w_1996,h_1462,al_b,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/c837a6_7c584dbe8daf4cbfab69251295b930fb~mv2.jpg"
+          alt="Design Dazz"
+        />
+      </div>
+      <div className="flex mt-25">
+        <div className="flex-row justify-center items-center">
+          <div className="text-center text-5xl text-brown">Our Services</div>
+        </div>
+      </div>
     </div>
   );
 }
