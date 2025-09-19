@@ -37,13 +37,13 @@ export default function Header() {
       {/* Desktop Header */}
       <div className="hidden md:h-[130px] md:flex">
         <div className="h-full w-[30%] flex flex-row items-center justify-start bg-primary text-white pl-8">
-          <div>
+          <NavLink to="/">
             <Logo />
-          </div>
-          <div className="flex flex-col items-start justify-center ml-4">
+          </NavLink>
+          <NavLink to="/" className="flex flex-col items-start justify-center ml-4">
             <span className="font-bold">DESIGN</span>
             <span className="font-bold">DAZZ</span>
-          </div>
+          </NavLink>
         </div>
         <div className="h-full w-[70%] flex flex-row items-center justify-between bg-secondary font-normal px-[10%]">
           <NavLink
@@ -93,13 +93,13 @@ export default function Header() {
       <div className="flex h-[80px] md:hidden">
         <div className="h-full w-full flex flex-row items-center justify-between bg-primary text-white px-4">
           <div className="flex flex-row items-center">
-            <div>
+            <NavLink to="/">
               <Logo />
-            </div>
-            <div className="flex flex-col items-start ml-3 text-sm font-bold">
+            </NavLink>
+            <NavLink to="/" className="flex flex-col items-start ml-3 text-sm font-bold">
               <span>DESIGN</span>
               <span>DAZZ</span>
-            </div>
+            </NavLink>
           </div>
           <div>
             <FaAlignJustify
