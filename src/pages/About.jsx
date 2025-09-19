@@ -4,7 +4,6 @@ export default function About() {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-6">About Design Dazz</h1>
-          <div className="w-24 h-1 bg-blue-500 mx-auto mb-8"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
