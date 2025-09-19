@@ -13,7 +13,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
+
         {/* Hero Image - 70% width on desktop */}
         <div className="w-full md:w-[70%] flex justify-center items-center bg-gray-50">
           <img
@@ -27,17 +27,16 @@ export default function Home() {
       {/* About Section */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brown mb-6">
-            About
-          </h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brown mb-6">About</h2>
           <div className="w-24 h-1 bg-brown mx-auto mb-8"></div>
         </div>
-        
+
         <div className="text-center">
           <p className="text-lg md:text-xl text-brown leading-relaxed max-w-3xl mx-auto">
-            Welcome to Design Dazz, where imagination meets innovation through the power of 3D design. 
-            As a specialized interior designer, I focus exclusively on creating stunning three-dimensional 
-            visualizations that transform your space before a single piece of furniture is moved.
+            Welcome to Design Dazz, where imagination meets innovation through the power of 3D
+            design. As a specialized interior designer, I focus exclusively on creating stunning
+            three-dimensional visualizations that transform your space before a single piece of
+            furniture is moved.
           </p>
         </div>
       </div>

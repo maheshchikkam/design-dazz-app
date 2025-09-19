@@ -1,5 +1,5 @@
-@import url("https://fonts.cdnfonts.com/css/futura-lt");
-@import "tailwindcss";
+@import url('https://fonts.cdnfonts.com/css/futura-lt');
+@import 'tailwindcss';
 
 @theme {
   --color-primary: #365150;
@@ -8,5 +8,5 @@
 }
 
 body {
-  font-family: "Futura LT", sans-serif;
+  font-family: 'Futura LT', sans-serif;
 }

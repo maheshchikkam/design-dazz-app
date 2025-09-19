@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { FaAlignJustify } from "react-icons/fa";
-import { useState, useEffect } from "react";
-import { IoClose } from "react-icons/io5";
+import { NavLink } from 'react-router-dom';
+import { FaAlignJustify } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { IoClose } from 'react-icons/io5';
 
-import Logo from "./Logo";
+import Logo from './Logo';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,14 +12,14 @@ export default function Header() {
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
 
     // Cleanup function to reset overflow when component unmounts
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [menuOpen]);
 
@@ -50,8 +50,8 @@ export default function Header() {
             to="/"
             className={({ isActive }) =>
               isActive
-                ? "text-primary font-semibold"
-                : "text-brown hover:text-primary transition-colors duration-200"
+                ? 'text-primary font-semibold'
+                : 'text-brown hover:text-primary transition-colors duration-200'
             }
           >
             Home
@@ -60,8 +60,8 @@ export default function Header() {
             to="/portfolio"
             className={({ isActive }) =>
               isActive
-                ? "text-primary font-semibold"
-                : "text-brown hover:text-primary transition-colors duration-200"
+                ? 'text-primary font-semibold'
+                : 'text-brown hover:text-primary transition-colors duration-200'
             }
           >
             Portfolio
@@ -70,8 +70,8 @@ export default function Header() {
             to="/about"
             className={({ isActive }) =>
               isActive
-                ? "text-primary font-semibold"
-                : "text-brown hover:text-primary transition-colors duration-200"
+                ? 'text-primary font-semibold'
+                : 'text-brown hover:text-primary transition-colors duration-200'
             }
           >
             About
@@ -80,8 +80,8 @@ export default function Header() {
             to="/contact"
             className={({ isActive }) =>
               isActive
-                ? "text-primary font-semibold"
-                : "text-brown hover:text-primary transition-colors duration-200"
+                ? 'text-primary font-semibold'
+                : 'text-brown hover:text-primary transition-colors duration-200'
             }
           >
             Contact
@@ -104,7 +104,7 @@ export default function Header() {
           <div>
             <FaAlignJustify
               className={`text-2xl text-white cursor-pointer transition-transform duration-300 hover:scale-110 ${
-                iconClicked ? "rotate-90 scale-110" : ""
+                iconClicked ? 'rotate-90 scale-110' : ''
               }`}
               onClick={handleMenuToggle}
             />
@@ -131,8 +131,8 @@ export default function Header() {
                   to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-primary font-bold"
-                      : "text-brown hover:text-primary transition-colors duration-200"
+                      ? 'text-primary font-bold'
+                      : 'text-brown hover:text-primary transition-colors duration-200'
                   }
                   onClick={closeMenu}
                 >
@@ -142,8 +142,8 @@ export default function Header() {
                   to="/portfolio"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-primary font-bold"
-                      : "text-brown hover:text-primary transition-colors duration-200"
+                      ? 'text-primary font-bold'
+                      : 'text-brown hover:text-primary transition-colors duration-200'
                   }
                   onClick={closeMenu}
                 >
@@ -153,8 +153,8 @@ export default function Header() {
                   to="/about"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-primary font-bold"
-                      : "text-brown hover:text-primary transition-colors duration-200"
+                      ? 'text-primary font-bold'
+                      : 'text-brown hover:text-primary transition-colors duration-200'
                   }
                   onClick={closeMenu}
                 >
@@ -164,8 +164,8 @@ export default function Header() {
                   to="/contact"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-primary font-bold"
-                      : "text-brown hover:text-primary transition-colors duration-200"
+                      ? 'text-primary font-bold'
+                      : 'text-brown hover:text-primary transition-colors duration-200'
                   }
                   onClick={closeMenu}
                 >

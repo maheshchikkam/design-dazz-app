@@ -1,4 +1,12 @@
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaLinkedin, FaInstagram, FaPinterest } from 'react-icons/fa';
+import {
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaClock,
+  FaLinkedin,
+  FaInstagram,
+  FaPinterest,
+} from 'react-icons/fa';
 
 export default function Contact() {
   return (
@@ -6,24 +14,22 @@ export default function Contact() {
       <div className="container mx-auto px-4 py-8 md:py-16">
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-3xl md:text-5xl font-bold text-primary mb-4">
-            Get In Touch
-          </h1>
+          <h1 className="text-3xl md:text-5xl font-bold text-primary mb-4">Get In Touch</h1>
           <p className="text-brown text-lg md:text-xl max-w-2xl mx-auto">
-            Ready to transform your space? Let's discuss your interior design project and bring your vision to life.
+            Ready to transform your space? Let's discuss your interior design project and bring your
+            vision to life.
           </p>
         </div>
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-          
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
                 Contact Information
               </h2>
-              
+
               {/* Contact Items */}
               <div className="space-y-6">
                 {/* Phone */}
@@ -82,22 +88,22 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-bold text-primary mb-4">Follow Us</h3>
               <div className="flex space-x-4">
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
                   aria-label="LinkedIn"
                 >
                   <FaLinkedin className="text-white text-lg" />
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
                   aria-label="Instagram"
                 >
                   <FaInstagram className="text-white text-lg" />
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
                   aria-label="Pinterest"
                 >
@@ -109,10 +115,8 @@ export default function Contact() {
 
           {/* Contact Form */}
           <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-              Start Your Project
-            </h2>
-            
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Start Your Project</h2>
+
             <form className="space-y-6">
               {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -241,30 +245,34 @@ export default function Contact() {
         {/* Additional Information */}
         <div className="mt-16 text-center">
           <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
-            <h3 className="text-xl md:text-2xl font-bold text-primary mb-4">
-              What Happens Next?
-            </h3>
+            <h3 className="text-xl md:text-2xl font-bold text-primary mb-4">What Happens Next?</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
               <div className="text-center">
                 <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3 text-xl font-bold">
                   1
                 </div>
                 <h4 className="font-semibold text-brown mb-2">Initial Consultation</h4>
-                <p className="text-brown text-sm">We'll discuss your vision, needs, and project scope</p>
+                <p className="text-brown text-sm">
+                  We'll discuss your vision, needs, and project scope
+                </p>
               </div>
               <div className="text-center">
                 <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3 text-xl font-bold">
                   2
                 </div>
                 <h4 className="font-semibold text-brown mb-2">Design Proposal</h4>
-                <p className="text-brown text-sm">Receive a detailed proposal with timeline and budget</p>
+                <p className="text-brown text-sm">
+                  Receive a detailed proposal with timeline and budget
+                </p>
               </div>
               <div className="text-center">
                 <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3 text-xl font-bold">
                   3
                 </div>
                 <h4 className="font-semibold text-brown mb-2">Project Kickoff</h4>
-                <p className="text-brown text-sm">Begin transforming your space into something extraordinary</p>
+                <p className="text-brown text-sm">
+                  Begin transforming your space into something extraordinary
+                </p>
               </div>
             </div>
           </div>
