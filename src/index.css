@@ -4,11 +4,7 @@
 @theme {
   --color-primary: #365150;
   --color-secondary: #f9f5f3;
-  --font-color-brown: #40251b;
-}
-
-.text-brown {
-  color: var(--font-color-brown);
+  --color-brown: #40251b;
 }
 
 body {
