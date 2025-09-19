@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 // Sample portfolio data (should match Portfolio.jsx)
@@ -52,59 +52,42 @@ const ProjectDetails = () => {
     );
   }
 
-  // Carousel state
-  const [currentImg, setCurrentImg] = useState(0);
   const images = project.images || [];
-
-  const prevImg = () => setCurrentImg((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  const nextImg = () => setCurrentImg((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  const selectImg = (idx) => setCurrentImg(idx);
 
   return (
     <div className="bg-secondary min-h-screen w-full">
       <div className="max-w-4xl mx-auto p-6">
-        <Link to="/portfolio" className="text-primary underline mb-4 inline-block">
-          &larr; Back to Portfolio
-        </Link>
-        <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
+        <div className="flex flex-col items-start gap-1 mb-4">
+          <Link to="/portfolio" className="text-primary underline text-base">
+            &larr; Back to Portfolio
+          </Link>
+          <h1 className="text-3xl font-bold mt-1">{project.title}</h1>
+        </div>
 
-        {/* Image Carousel */}
+        {/* Image Gallery */}
         {images.length > 0 && (
-          <div className="mb-8">
-            <div className="relative flex items-center justify-center">
-              <button
-                onClick={prevImg}
-                className="absolute left-0 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow"
-                aria-label="Previous image"
-              >
-                &#8592;
-              </button>
-              <img
-                src={images[currentImg]}
-                alt={`Project screenshot ${currentImg + 1}`}
-                className="w-full max-w-2xl h-72 object-cover rounded shadow mx-auto"
-              />
-              <button
-                onClick={nextImg}
-                className="absolute right-0 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow"
-                aria-label="Next image"
-              >
-                &#8594;
-              </button>
-            </div>
-            {/* Thumbnails */}
-            <div className="flex justify-center gap-2 mt-3">
+          <div
+            className="mb-8 w-screen max-w-none relative left-1/2 right-1/2 -mx-[50vw] px-0"
+            style={{
+              position: 'relative',
+              left: '50%',
+              right: '50%',
+              marginLeft: '-50vw',
+              marginRight: '-50vw',
+              width: '100vw',
+            }}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-0 gap-x-0">
               {images.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`Thumbnail ${idx + 1}`}
-                  onClick={() => selectImg(idx)}
-                  className={`w-16 h-12 object-cover rounded cursor-pointer border-2 ${
-                    idx === currentImg ? 'border-primary' : 'border-transparent'
-                  }`}
-                  style={{ opacity: idx === currentImg ? 1 : 0.6 }}
-                />
+                <div key={idx} className="relative group overflow-hidden rounded-lg">
+                  <img
+                    src={img}
+                    alt={`Project screenshot ${idx + 1}`}
+                    className="w-full h-[40vw] max-h-[480px] object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90"
+                    style={{ minHeight: '200px', borderRadius: 0, boxShadow: 'none' }}
+                  />
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                </div>
               ))}
             </div>
           </div>
