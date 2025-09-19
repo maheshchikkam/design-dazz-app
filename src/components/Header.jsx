@@ -12,14 +12,14 @@ export default function Header() {
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
-    
+
     // Cleanup function to reset overflow when component unmounts
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [menuOpen]);
 
@@ -49,7 +49,9 @@ export default function Header() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "text-primary font-semibold" : "text-brown hover:text-primary transition-colors duration-200"
+              isActive
+                ? "text-primary font-semibold"
+                : "text-brown hover:text-primary transition-colors duration-200"
             }
           >
             Home
@@ -57,7 +59,9 @@ export default function Header() {
           <NavLink
             to="/portfolio"
             className={({ isActive }) =>
-              isActive ? "text-primary font-semibold" : "text-brown hover:text-primary transition-colors duration-200"
+              isActive
+                ? "text-primary font-semibold"
+                : "text-brown hover:text-primary transition-colors duration-200"
             }
           >
             Portfolio
@@ -65,7 +69,9 @@ export default function Header() {
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              isActive ? "text-primary font-semibold" : "text-brown hover:text-primary transition-colors duration-200"
+              isActive
+                ? "text-primary font-semibold"
+                : "text-brown hover:text-primary transition-colors duration-200"
             }
           >
             About
@@ -73,7 +79,9 @@ export default function Header() {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              isActive ? "text-primary font-semibold" : "text-brown hover:text-primary transition-colors duration-200"
+              isActive
+                ? "text-primary font-semibold"
+                : "text-brown hover:text-primary transition-colors duration-200"
             }
           >
             Contact
@@ -115,14 +123,16 @@ export default function Header() {
                 onClick={closeMenu}
               />
             </div>
-            
+
             {/* Navigation menu */}
             <div className="flex-1 flex flex-col items-center justify-center">
               <nav className="flex flex-col gap-8 text-2xl font-semibold text-center animate-in slide-in-from-top duration-500">
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    isActive ? "text-primary font-bold" : "text-brown hover:text-primary transition-colors duration-200"
+                    isActive
+                      ? "text-primary font-bold"
+                      : "text-brown hover:text-primary transition-colors duration-200"
                   }
                   onClick={closeMenu}
                 >
@@ -131,7 +141,9 @@ export default function Header() {
                 <NavLink
                   to="/portfolio"
                   className={({ isActive }) =>
-                    isActive ? "text-primary font-bold" : "text-brown hover:text-primary transition-colors duration-200"
+                    isActive
+                      ? "text-primary font-bold"
+                      : "text-brown hover:text-primary transition-colors duration-200"
                   }
                   onClick={closeMenu}
                 >
@@ -140,7 +152,9 @@ export default function Header() {
                 <NavLink
                   to="/about"
                   className={({ isActive }) =>
-                    isActive ? "text-primary font-bold" : "text-brown hover:text-primary transition-colors duration-200"
+                    isActive
+                      ? "text-primary font-bold"
+                      : "text-brown hover:text-primary transition-colors duration-200"
                   }
                   onClick={closeMenu}
                 >
@@ -149,7 +163,9 @@ export default function Header() {
                 <NavLink
                   to="/contact"
                   className={({ isActive }) =>
-                    isActive ? "text-primary font-bold" : "text-brown hover:text-primary transition-colors duration-200"
+                    isActive
+                      ? "text-primary font-bold"
+                      : "text-brown hover:text-primary transition-colors duration-200"
                   }
                   onClick={closeMenu}
                 >
