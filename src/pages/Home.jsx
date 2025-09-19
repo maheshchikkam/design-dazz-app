@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Home() {
   return (
     <div className="bg-secondary">
@@ -50,6 +52,16 @@ export default function Home() {
             className="w-full rounded-lg shadow-lg"
           />
         </div>
+      </div>
+
+      {/* View Portfolio Link */}
+      <div className="text-center pb-12">
+        <Link
+          to="/portfolio"
+          className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-brown transition-colors duration-300 text-lg shadow-md"
+        >
+          View Portfolio
+        </Link>
       </div>
     </div>
   );

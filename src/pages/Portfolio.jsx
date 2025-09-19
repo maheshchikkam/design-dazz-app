@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaExternalLinkAlt, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign } from 'react-icons/fa';
 
 export default function Portfolio() {
@@ -187,9 +188,12 @@ export default function Portfolio() {
                 </div>
 
                 {/* View Project Button */}
-                <button className="w-full bg-primary text-white py-2 rounded-lg hover:bg-brown transition-colors duration-300 font-medium">
+                <Link
+                  to={`/portfolio/${item.id}`}
+                  className="block w-full bg-primary text-white py-2 rounded-lg hover:bg-brown transition-colors duration-300 font-medium text-center"
+                >
                   View Project Details
-                </button>
+                </Link>
               </div>
             </div>
           ))}
