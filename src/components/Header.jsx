@@ -16,7 +16,7 @@ export default function Header() {
           <div>
             <Logo />
           </div>
-          <div className="flex flex-col items-start justify-center ml-4 text-sm font-medium">
+          <div className="flex flex-col items-start justify-center ml-4">
             <span>DESIGN</span>
             <span>DAZZ</span>
           </div>
