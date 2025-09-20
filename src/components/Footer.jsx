@@ -8,7 +8,12 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
         {/* Logo and Address */}
         <div className="flex flex-row items-center gap-2">
-          <img src="/favicon-brown.svg" alt="Design Dazz Logo" loading="lazy" className="w-12 h-12 mb-2" />{' '}
+          <img
+            src="/favicon-brown.svg"
+            alt="Design Dazz Logo"
+            loading="lazy"
+            className="w-12 h-12 mb-2"
+          />{' '}
           <p className="font-semibold">Design Dazz</p>
         </div>
         {/* Address Info */}
