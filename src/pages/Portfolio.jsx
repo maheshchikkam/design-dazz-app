@@ -19,6 +19,18 @@ export default function Portfolio() {
         'Complete design of a 1200 sq ft living space with contemporary design elements.',
       tags: ['Modern', 'Minimalist', 'Living Room'],
     },
+    {
+      id: 2,
+      title: 'Nithins Room',
+      category: 'residential',
+      location: 'Banglore, KA',
+      year: '2025',
+      budget: '20,000',
+      image: '/images/project-2/1.jpg',
+      description:
+        'Complete room design of a 1200 sq ft living space with contemporary design elements.',
+      tags: ['Modern', 'Minimalist', 'Living Room'],
+    },
   ];
 
   const categories = [
@@ -109,10 +121,10 @@ export default function Portfolio() {
                     <FaCalendarAlt className="mr-2 text-primary" />
                     {item.year}
                   </div>
-                  <div className="flex items-center text-brown text-sm">
+                  {/* <div className="flex items-center text-brown text-sm">
                     <FaDollarSign className="mr-2 text-primary" />
                     {item.budget}
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Tags */}

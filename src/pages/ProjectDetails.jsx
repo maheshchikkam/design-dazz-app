@@ -14,6 +14,17 @@ const portfolioItems = [
     description: 'Complete design of a 1200 sq ft living space with contemporary design elements.',
     tags: ['Modern', 'Minimalist', 'Living Room'],
   },
+  {
+    id: 2,
+    projectFolder: '/images/project-2',
+    title: 'Nithins Room',
+    category: 'residential',
+    location: 'Banglore, KA',
+    year: '2025',
+    budget: '20,000',
+    description: 'Complete design of a 1200 sq ft living space with contemporary design elements.',
+    tags: ['Modern', 'Minimalist', 'Living Room'],
+  },
   // ...add more sample projects as needed
 ];
 
@@ -203,10 +214,10 @@ const ProjectDetails = () => {
               <span className="material-icons text-primary mr-2">calendar_today</span>
               <span className="font-semibold">Year:</span>&nbsp;{project.year}
             </div>
-            <div className="flex items-center mb-2">
+            {/* <div className="flex items-center mb-2">
               <span className="material-icons text-primary mr-2">attach_money</span>
               <span className="font-semibold">Budget:</span>&nbsp;{project.budget}
-            </div>
+            </div> */}
           </div>
         </div>
 
