@@ -34,7 +34,11 @@ export default function ScrollToTop() {
   return (
     <>
       {isVisible && (
-        <button onClick={scrollToTop} className="scroll-to-top" aria-label="Scroll to top">
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-[#365150] text-white w-10 h-10 rounded-full flex items-center justify-center text-2xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer z-10 sm:bottom-4 sm:right-4 sm:w-9 sm:h-9"
+          aria-label="Scroll to top"
+        >
           ↑
         </button>
       )}
