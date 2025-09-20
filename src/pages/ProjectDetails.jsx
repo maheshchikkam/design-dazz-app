@@ -40,15 +40,13 @@ const ProjectDetails = () => {
           </div>
         )}
 
-        <Suspense fallback={<div className="text-primary text-center py-12">Loading gallery...</div>}>
+        <Suspense
+          fallback={<div className="text-primary text-center py-12">Loading gallery...</div>}
+        >
           <ImageGallery images={images} imagesLoaded={imagesLoaded} />
         </Suspense>
 
-        <ProjectInfo
-          location={project.location}
-          category={project.category}
-          year={project.year}
-        />
+        <ProjectInfo location={project.location} category={project.category} year={project.year} />
 
         <p className="text-gray-700 text-lg mb-4 bg-white rounded p-4 shadow-sm">
           {project.description}
