@@ -24,8 +24,8 @@ export default function Footer() {
         {/* Contact Info */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <p className="font-semibold">Contact</p>
-          <a href="tel:+1234567890" className="hover:underline">
-            +1 234 567 890
+          <a href="tel:+917993136717" className="hover:underline">
+            +91 799-313-6717
           </a>
           <a href="mailto:hellodesigndazz@gmail.com" className="hover:underline">
             hellodesigndazz@gmail.com
