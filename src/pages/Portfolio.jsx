@@ -14,68 +14,10 @@ export default function Portfolio() {
       location: 'Manhattan, NY',
       year: '2024',
       budget: '$45,000',
-      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
+      image: '/images/project-1/MBR/MBR_4.jpg',
       description:
         'Complete renovation of a 1200 sq ft living space with contemporary design elements.',
       tags: ['Modern', 'Minimalist', 'Living Room'],
-    },
-    {
-      id: 2,
-      title: 'Luxury Hotel Lobby Design',
-      category: 'commercial',
-      location: 'Brooklyn, NY',
-      year: '2024',
-      budget: '$120,000',
-      image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop',
-      description:
-        'Sophisticated lobby design for a boutique hotel featuring custom furniture and lighting.',
-      tags: ['Luxury', 'Commercial', 'Hospitality'],
-    },
-    {
-      id: 3,
-      title: 'Cozy Bedroom Retreat',
-      category: 'residential',
-      location: 'Queens, NY',
-      year: '2023',
-      budget: '$25,000',
-      image: 'https://images.unsplash.com/photo-1540518614846-7eded47ee8b8?w=800&h=600&fit=crop',
-      description:
-        'Warm and inviting master bedroom design with natural textures and calming colors.',
-      tags: ['Cozy', 'Bedroom', 'Natural'],
-    },
-    {
-      id: 4,
-      title: 'Corporate Office Redesign',
-      category: 'commercial',
-      location: 'Manhattan, NY',
-      year: '2023',
-      budget: '$85,000',
-      image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop',
-      description:
-        'Modern office space promoting collaboration and productivity with flexible layouts.',
-      tags: ['Corporate', 'Modern', 'Workspace'],
-    },
-    {
-      id: 5,
-      title: 'Scandinavian Kitchen Design',
-      category: 'residential',
-      location: 'Bronx, NY',
-      year: '2023',
-      budget: '$55,000',
-      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
-      description: 'Clean, functional kitchen design inspired by Scandinavian aesthetics.',
-      tags: ['Scandinavian', 'Kitchen', 'Functional'],
-    },
-    {
-      id: 6,
-      title: 'Boutique Restaurant Interior',
-      category: 'commercial',
-      location: 'Staten Island, NY',
-      year: '2024',
-      budget: '$95,000',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
-      description: 'Intimate dining space with warm lighting and elegant finishes.',
-      tags: ['Restaurant', 'Intimate', 'Elegant'],
     },
   ];
 
@@ -133,9 +75,6 @@ export default function Portfolio() {
                   alt={item.title}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center">
-                  <FaExternalLinkAlt className="text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
 
                 {/* Category Badge */}
                 <div className="absolute top-4 right-4">

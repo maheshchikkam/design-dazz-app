@@ -5,34 +5,15 @@ import { useParams, Link } from 'react-router-dom';
 const portfolioItems = [
   {
     id: 1,
+    projectFolder: '/images/project-1',
     title: 'Modern Living Room Transformation',
     category: 'residential',
     location: 'Manhattan, NY',
     year: '2024',
     budget: '$45,000',
-    images: [
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-      'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80',
-    ],
     description:
       'Complete renovation of a 1200 sq ft living space with contemporary design elements.',
     tags: ['Modern', 'Minimalist', 'Living Room'],
-  },
-  {
-    id: 2,
-    title: 'Luxury Hotel Lobby Design',
-    category: 'commercial',
-    location: 'Brooklyn, NY',
-    year: '2024',
-    budget: '$120,000',
-    images: [
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
-    ],
-    description:
-      'Sophisticated lobby design for a boutique hotel featuring custom furniture and lighting.',
-    tags: ['Luxury', 'Commercial', 'Hospitality'],
   },
   // ...add more sample projects as needed
 ];
@@ -43,23 +24,67 @@ const ProjectDetails = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const project = portfolioItems.find((p) => p.id === Number(projectId));
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     // Reset images loaded state when project changes
     setImagesLoaded(false);
 
-    // Preload images
+    // Load and preload images from the project folder
     const loadImages = async () => {
-      if (project?.images) {
-        const imagePromises = project.images.map((src) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.src = src;
-            img.onload = resolve;
+      if (project?.projectFolder) {
+        try {
+          // Function to test if an image exists
+          const imageExists = async (path) => {
+            try {
+              const response = await fetch(path, { method: 'HEAD' });
+              return response.ok;
+            } catch {
+              return false;
+            }
+          };
+
+          // Generate potential image paths by testing common image numbers
+          const potentialImages = [];
+          const categories = ['CBR', 'GBR', 'KITCHEN', 'Living', 'MBR'];
+
+          // Add numbered images for each category
+          for (const category of categories) {
+            for (let i = 1; i <= 5; i++) {
+              potentialImages.push(`${project.projectFolder}/${category}_${i}.jpg`);
+            }
+          }
+
+          // Add special case for POOJA.jpg
+          potentialImages.push(`${project.projectFolder}/POOJA.jpg`);
+
+          // Test each path and filter only existing images
+          const existencePromises = potentialImages.map(async (path) => {
+            const exists = await imageExists(path);
+            return exists ? path : null;
           });
-        });
-        await Promise.all(imagePromises);
-        setImagesLoaded(true);
+
+          const imagePaths = (await Promise.all(existencePromises)).filter((path) => path !== null);
+
+          const imagePromises = imagePaths.map((src) => {
+            return new Promise((resolve) => {
+              const img = new Image();
+              img.src = src;
+              img.onload = () => resolve(src);
+              img.onerror = () => resolve(null); // Handle missing images gracefully
+            });
+          });
+
+          const loadedImages = await Promise.all(imagePromises);
+          // Filter out any failed image loads
+          const validImages = loadedImages.filter((img) => img !== null);
+          setImages(validImages);
+          setImagesLoaded(true);
+        } catch (error) {
+          console.error('Error loading images:', error);
+          setImagesLoaded(true); // Still set as loaded even if there's an error
+          setImages([]); // Set empty array in case of error
+        }
       }
     };
 
@@ -79,8 +104,6 @@ const ProjectDetails = () => {
     );
   }
 
-  const images = project.images || [];
-
   return (
     <div className="bg-secondary min-h-screen w-full">
       <div className="max-w-4xl mx-auto p-6">
@@ -92,7 +115,11 @@ const ProjectDetails = () => {
         </div>
 
         {/* Image Gallery */}
-        {images.length > 0 && (
+        {!imagesLoaded ? (
+          <div className="flex justify-center items-center py-12">
+            <div className="text-primary">Loading images...</div>
+          </div>
+        ) : images.length > 0 ? (
           <div
             className="mb-8 w-screen max-w-none relative left-1/2 right-1/2 -mx-[50vw]"
             style={{
@@ -153,6 +180,8 @@ const ProjectDetails = () => {
               </div>
             )}
           </div>
+        ) : (
+          <div className="text-center py-8">No images available for this project.</div>
         )}
 
         {/* Project Details Card */}
