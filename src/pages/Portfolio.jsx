@@ -9,14 +9,14 @@ export default function Portfolio() {
   const portfolioItems = [
     {
       id: 1,
-      title: 'Modern Living Room Transformation',
+      title: 'Modern Home Design',
       category: 'residential',
-      location: 'Manhattan, NY',
-      year: '2024',
-      budget: '$45,000',
+      location: 'Marina Skies, HYD',
+      year: '2025',
+      budget: '20,000',
       image: '/images/project-1/MBR/MBR_4.jpg',
       description:
-        'Complete renovation of a 1200 sq ft living space with contemporary design elements.',
+        'Complete design of a 1200 sq ft living space with contemporary design elements.',
       tags: ['Modern', 'Minimalist', 'Living Room'],
     },
   ];
