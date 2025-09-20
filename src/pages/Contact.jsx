@@ -22,103 +22,103 @@ export default function Contact() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-                Contact Information
-              </h2>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 text-center">
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+                  Contact Information
+                </h2>
 
-              {/* Contact Items */}
-              <div className="space-y-6">
-                {/* Phone */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary p-3 rounded-full">
-                    <FaPhone className="text-white text-lg" />
+                {/* Contact Items */}
+                <div className="space-y-6">
+                  {/* Phone */}
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-primary p-3 rounded-full">
+                      <FaPhone className="text-white text-lg" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-brown text-lg">Phone</h3>
+                      <p className="text-brown">+91 799-313-6717</p>
+                      <p className="text-brown text-sm">Available Mon-Sat, 9 AM - 6 PM</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-brown text-lg">Phone</h3>
-                    <p className="text-brown">+1 (555) 123-4567</p>
-                    <p className="text-brown text-sm">Available Mon-Fri, 9 AM - 6 PM</p>
+
+                  {/* Email */}
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-primary p-3 rounded-full">
+                      <FaEnvelope className="text-white text-lg" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-brown text-lg">Email</h3>
+                      <p className="text-brown">hellodesigndazz@gmail.com</p>
+                      <p className="text-brown text-sm">We'll respond within 24 hours</p>
+                    </div>
+                  </div>
+
+                  {/* Address */}
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-primary p-3 rounded-full">
+                      <FaMapMarkerAlt className="text-white text-lg" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-brown text-lg">Studio Address</h3>
+                      <p className="text-brown">Miyapur,Hyderabad</p>
+                      <p className="text-brown">Telangana, India - 500049</p>
+                      {/* <p className="text-brown text-sm">By appointment only</p> */}
+                    </div>
+                  </div>
+
+                  {/* Business Hours */}
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-primary p-3 rounded-full">
+                      <FaClock className="text-white text-lg" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-brown text-lg">Business Hours</h3>
+                      <p className="text-brown">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                      <p className="text-brown">Saturday: 10:00 AM - 4:00 PM</p>
+                      <p className="text-brown">Sunday: Closed</p>
+                    </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Email */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary p-3 rounded-full">
-                    <FaEnvelope className="text-white text-lg" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-brown text-lg">Email</h3>
-                    <p className="text-brown">hello@designdazz.com</p>
-                    <p className="text-brown text-sm">We'll respond within 24 hours</p>
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary p-3 rounded-full">
-                    <FaMapMarkerAlt className="text-white text-lg" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-brown text-lg">Studio Address</h3>
-                    <p className="text-brown">123 Design Street</p>
-                    <p className="text-brown">Creative District, NY 10001</p>
-                    <p className="text-brown text-sm">By appointment only</p>
-                  </div>
-                </div>
-
-                {/* Business Hours */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary p-3 rounded-full">
-                    <FaClock className="text-white text-lg" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-brown text-lg">Business Hours</h3>
-                    <p className="text-brown">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    <p className="text-brown">Saturday: 10:00 AM - 4:00 PM</p>
-                    <p className="text-brown">Sunday: Closed</p>
-                  </div>
+              {/* Social Media */}
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-primary mb-4">Follow Us</h3>
+                <div className="flex justify-center space-x-4">
+                  <a
+                    href="#"
+                    className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
+                    aria-label="LinkedIn"
+                  >
+                    <FaLinkedin className="text-white text-lg" />
+                  </a>
+                  <a
+                    href="#"
+                    className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
+                    aria-label="Instagram"
+                  >
+                    <FaInstagram className="text-white text-lg" />
+                  </a>
+                  {/* <a
+                    href="#"
+                    className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
+                    aria-label="Pinterest"
+                  >
+                    <FaPinterest className="text-white text-lg" />
+                  </a> */}
                 </div>
               </div>
             </div>
 
-            {/* Social Media */}
-            <div>
-              <h3 className="text-xl font-bold text-primary mb-4">Follow Us</h3>
-              <div className="flex space-x-4">
-                <a
-                  href="#"
-                  className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
-                  aria-label="LinkedIn"
-                >
-                  <FaLinkedin className="text-white text-lg" />
-                </a>
-                <a
-                  href="#"
-                  className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
-                  aria-label="Instagram"
-                >
-                  <FaInstagram className="text-white text-lg" />
-                </a>
-                <a
-                  href="#"
-                  className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
-                  aria-label="Pinterest"
-                >
-                  <FaPinterest className="text-white text-lg" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg">
+            {/* Contact Form */}
+            {/* <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Start Your Project</h2>
 
             <form className="space-y-6">
-              {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="firstName" className="block text-brown font-medium mb-2">
@@ -147,8 +147,6 @@ export default function Contact() {
                   />
                 </div>
               </div>
-
-              {/* Email and Phone */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="email" className="block text-brown font-medium mb-2">
@@ -176,8 +174,6 @@ export default function Contact() {
                   />
                 </div>
               </div>
-
-              {/* Project Type */}
               <div>
                 <label htmlFor="projectType" className="block text-brown font-medium mb-2">
                   Project Type *
@@ -196,8 +192,6 @@ export default function Contact() {
                   <option value="other">Other</option>
                 </select>
               </div>
-
-              {/* Budget Range */}
               <div>
                 <label htmlFor="budget" className="block text-brown font-medium mb-2">
                   Budget Range
@@ -215,8 +209,6 @@ export default function Contact() {
                   <option value="over-100k">Over $100,000</option>
                 </select>
               </div>
-
-              {/* Message */}
               <div>
                 <label htmlFor="message" className="block text-brown font-medium mb-2">
                   Project Details *
@@ -230,8 +222,6 @@ export default function Contact() {
                   placeholder="Tell us about your project, timeline, and any specific requirements..."
                 ></textarea>
               </div>
-
-              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-primary text-white font-semibold py-4 px-6 rounded-lg hover:bg-brown transition-colors duration-300 focus:ring-2 focus:ring-primary focus:ring-offset-2"
@@ -239,6 +229,7 @@ export default function Contact() {
                 Send Message
               </button>
             </form>
+          </div> */}
           </div>
         </div>
 

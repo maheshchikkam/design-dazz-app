@@ -35,7 +35,7 @@ export default function About() {
 
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-semibold text-gray-800">50+</h3>
+                <h3 className="font-semibold text-gray-800">20+</h3>
                 <p className="text-sm text-gray-600">3D Projects Completed</p>
               </div>
               <div className="text-center p-4 bg-gray-50 rounded-lg">
