@@ -9,4 +9,5 @@
 
 body {
   font-family: 'Futura LT', sans-serif;
+  background-color: var(--color-secondary);
 }
