@@ -21,6 +21,7 @@ export default function Home() {
           <img
             src="https://static.wixstatic.com/media/c837a6_dd175849cd9f4e3db86a04ab14f9f617~mv2.jpg/v1/crop/x_0,y_1120,w_4480,h_4480/fill/w_628,h_628,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/shutterstock_1922829893.jpg"
             alt="Design Dazz Interior Design"
+            loading="lazy"
             className="w-full h-full object-cover min-h-[300px] md:min-h-[500px]"
           />
         </div>
@@ -49,6 +50,7 @@ export default function Home() {
           <img
             src="https://static.wixstatic.com/media/c837a6_7c584dbe8daf4cbfab69251295b930fb~mv2.jpg/v1/fill/w_1996,h_1462,al_b,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/c837a6_7c584dbe8daf4cbfab69251295b930fb~mv2.jpg"
             alt="Design Dazz Portfolio"
+            loading="lazy"
             className="w-full rounded-lg shadow-lg"
           />
         </div>

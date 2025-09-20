@@ -142,6 +142,7 @@ const ProjectDetails = () => {
                   <img
                     src={img}
                     alt={`Project screenshot ${idx + 1}`}
+                    loading="lazy"
                     className="w-full object-cover transition-all duration-300 group-hover:brightness-110"
                     style={{
                       display: 'block',
@@ -174,6 +175,7 @@ const ProjectDetails = () => {
                 <img
                   src={selectedImage}
                   alt="Enlarged view"
+                  loading="lazy"
                   className="max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl transform transition-transform duration-300 scale-95 hover:scale-100"
                 />
               </div>
