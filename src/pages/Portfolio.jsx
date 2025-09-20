@@ -14,7 +14,7 @@ export default function Portfolio() {
       location: 'Marina Skies, HYD',
       year: '2025',
       budget: '20,000',
-      image: '/images/project-1/MBR_4.jpg',
+      image: '/images/project-1/1.jpg',
       description:
         'Complete design of a 1200 sq ft living space with contemporary design elements.',
       tags: ['Modern', 'Minimalist', 'Living Room'],

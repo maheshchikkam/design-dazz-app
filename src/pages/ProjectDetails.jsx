@@ -54,19 +54,14 @@ const ProjectDetails = () => {
             }
           };
 
-          // Generate potential image paths by testing common image numbers
+          // Generate potential image paths by testing consecutive numbers
           const potentialImages = [];
-          const categories = ['CBR', 'GBR', 'KITCHEN', 'Living', 'MBR'];
+          const maxImagesToTry = 50; // Adjust this number based on your needs
 
-          // Add numbered images for each category
-          for (const category of categories) {
-            for (let i = 1; i <= 5; i++) {
-              potentialImages.push(`${project.projectFolder}/${category}_${i}.jpg`);
-            }
+          // Add numbered images (1.jpg, 2.jpg, etc.)
+          for (let i = 1; i <= maxImagesToTry; i++) {
+            potentialImages.push(`${project.projectFolder}/${i}.jpg`);
           }
-
-          // Add special case for POOJA.jpg
-          potentialImages.push(`${project.projectFolder}/POOJA.jpg`);
 
           // Test each path and filter only existing images
           const existencePromises = potentialImages.map(async (path) => {
