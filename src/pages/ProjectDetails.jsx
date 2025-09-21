@@ -70,13 +70,13 @@ const ProjectDetails = () => {
           </div>
         )}
 
-        {imagesLoaded && loadedCount === 0 && (
-          <div className="text-primary text-center py-8">No images available for this project.</div>
-        )}
-
         <Suspense fallback={<LoadingFallback />}>
           <ImageGallery images={images} imagesLoaded={imagesLoaded} />
         </Suspense>
+
+        {imagesLoaded && images.length === 0 && (
+          <div className="text-primary text-center py-8">No images available for this project.</div>
+        )}
 
         <ProjectInfo location={project.location} category={project.category} year={project.year} />
 

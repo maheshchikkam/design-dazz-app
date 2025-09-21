@@ -76,19 +76,25 @@ const ProgressiveImage = ({ src, alt, onClick, height }) => {
   return (
     <div
       ref={imageRef}
-      className="relative group overflow-hidden rounded-lg mb-4 cursor-pointer break-inside-avoid transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
+      className="relative group overflow-hidden rounded-lg mb-4 cursor-pointer break-inside-avoid will-change-transform"
+      style={{
+        transform: 'translate3d(0, 0, 0)',
+        transition: 'transform 0.3s ease-out',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = 'translate3d(0, -4px, 0)')}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = 'translate3d(0, 0, 0)')}
       onClick={onClick}
     >
       <img
         src={generateBlurDataUrl()}
         alt={alt}
-        className={`w-full object-cover transition-opacity duration-500 ${
-          isLoaded ? 'opacity-0' : 'opacity-100'
-        }`}
+        className={`w-full object-cover will-change-opacity`}
         style={{
           position: 'absolute',
           height: height,
           borderRadius: '12px',
+          opacity: isLoaded ? 0 : 1,
+          transition: 'opacity 0.5s ease-out',
         }}
       />
       {isVisible && (
@@ -97,18 +103,37 @@ const ProgressiveImage = ({ src, alt, onClick, height }) => {
           alt={alt}
           loading="lazy"
           onLoad={() => setIsLoaded(true)}
-          className={`w-full object-cover transition-all duration-500 group-hover:brightness-110 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="w-full object-cover will-change-[opacity,filter]"
           style={{
             height: height,
             borderRadius: '12px',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+            opacity: isLoaded ? 1 : 0,
+            transition: 'opacity 0.5s ease-out, filter 0.3s ease-out',
+            filter: 'brightness(100%)',
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.filter = 'brightness(110%)')}
+          onMouseLeave={(e) => (e.currentTarget.style.filter = 'brightness(100%)')}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300">
-        <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 will-change-opacity"
+        style={{
+          opacity: 0,
+          transition: 'opacity 0.3s ease-out',
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.opacity = 1)}
+        onMouseLeave={(e) => (e.currentTarget.style.opacity = 0)}
+      >
+        <div
+          className="absolute bottom-0 left-0 right-0 p-4 text-white will-change-transform"
+          style={{
+            transform: 'translateY(16px)',
+            transition: 'transform 0.3s ease-out',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(16px)')}
+        >
           <span className="text-sm font-medium">Click to view full size</span>
         </div>
       </div>
