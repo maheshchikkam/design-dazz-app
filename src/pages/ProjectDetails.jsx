@@ -1,12 +1,12 @@
 import React, { lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProjectById } from '../data/portfolioData';
-import ProjectInfo from '../components/ProjectInfo';
-import ProjectTags from '../components/ProjectTags';
+import ProjectInfo from '../components/features/ProjectInfo';
+import ProjectTags from '../components/features/ProjectTags';
 import { useImageLoader } from '../hooks/useImageLoader';
 
 // Lazy load the ImageGallery component
-const ImageGallery = lazy(() => import('../components/ImageGallery'));
+const ImageGallery = lazy(() => import('../components/features/ImageGallery'));
 
 const ProjectDetails = () => {
   const { projectId } = useParams();

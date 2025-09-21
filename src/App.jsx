@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { useState } from 'react';
 
-import Header from './components/Header';
-import ScrollToTop from './components/ScrollToTop';
+import Header from './components/layout/Header';
+import ScrollToTop from './components/common/ScrollToTop';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProjectDetails from './pages/ProjectDetails';
-import Footer from './components/Footer';
-import './App.css';
+import Footer from './components/layout/Footer';
+import './assets/styles/App.css';
 
 function App() {
   const [count, setCount] = useState(0);

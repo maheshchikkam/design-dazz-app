@@ -3,7 +3,7 @@ import { FaAlignJustify } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { IoClose } from 'react-icons/io5';
 
-import Logo from './Logo';
+import Logo from '../common/Logo';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
