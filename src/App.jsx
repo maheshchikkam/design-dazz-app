@@ -1,19 +1,12 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/layout/Header';
 import ScrollToTop from './components/common/ScrollToTop';
-import Home from './pages/Home';
-import Portfolio from './pages/Portfolio';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import ProjectDetails from './pages/ProjectDetails';
 import Footer from './components/layout/Footer';
+import { routes } from './routes';
 import './assets/styles/App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Router>
       <ScrollToTop />
@@ -21,11 +14,9 @@ function App() {
         <Header />
         <div className="flex-1">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:projectId" element={<ProjectDetails />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            {routes.map((route) => (
+              <Route key={route.path} path={route.path} element={<route.element />} />
+            ))}
           </Routes>
         </div>
         <Footer />
