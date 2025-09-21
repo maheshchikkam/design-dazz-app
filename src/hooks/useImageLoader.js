@@ -94,10 +94,13 @@ export const useImageLoader = (projectFolder) => {
 
         // Start loading images in batches
         if (validPaths.length > 0) {
-          loadImageBatch(validPaths, 0);
+          await loadImageBatch(validPaths, 0);
+          // Only set imagesLoaded to true after first batch is loaded
           setImagesLoaded(true);
         } else {
-          setImagesLoaded(true);
+          setTimeout(() => {
+            setImagesLoaded(true);
+          }, 500); // Add a small delay to prevent flash
         }
       } catch (err) {
         setError(err.message);
