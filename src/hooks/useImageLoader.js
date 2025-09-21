@@ -1,13 +1,65 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+// Cache for storing preloaded images
+const imageCache = new Map();
+const preloadBatchSize = 5;
 
 export const useImageLoader = (projectFolder) => {
   const [images, setImages] = useState([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [loadedCount, setLoadedCount] = useState(0);
+
+  // Memoized image loading function
+  const preloadImage = useCallback((src) => {
+    if (imageCache.has(src)) {
+      return Promise.resolve(src);
+    }
+
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        imageCache.set(src, true);
+        resolve(src);
+      };
+      img.onerror = () => reject(new Error(`Failed to load ${src}`));
+    });
+  }, []);
+
+  // Batch load images
+  const loadImageBatch = useCallback(
+    async (imagePaths, startIndex) => {
+      const batch = imagePaths.slice(startIndex, startIndex + preloadBatchSize);
+      if (batch.length === 0) return;
+
+      try {
+        const loadedBatch = await Promise.all(
+          batch.map((path) => preloadImage(path).catch(() => null))
+        );
+        const validImages = loadedBatch.filter(Boolean);
+
+        setImages((prev) => [...prev, ...validImages]);
+        setLoadedCount((prev) => prev + validImages.length);
+
+        // Start loading next batch if available
+        if (startIndex + preloadBatchSize < imagePaths.length) {
+          setTimeout(() => {
+            loadImageBatch(imagePaths, startIndex + preloadBatchSize);
+          }, 100); // Small delay to prevent UI blocking
+        }
+      } catch (err) {
+        console.error('Error loading image batch:', err);
+      }
+    },
+    [preloadImage]
+  );
 
   useEffect(() => {
     setImagesLoaded(false);
     setError(null);
+    setLoadedCount(0);
+    setImages([]);
 
     const loadImages = async () => {
       if (!projectFolder) {
@@ -16,9 +68,13 @@ export const useImageLoader = (projectFolder) => {
       }
 
       try {
-        const imageExists = async (path) => {
+        // Fast check for existence using HEAD request
+        const checkImageExists = async (path) => {
           try {
-            const response = await fetch(path, { method: 'HEAD' });
+            const response = await fetch(path, {
+              method: 'HEAD',
+              cache: 'force-cache', // Use browser cache aggressively
+            });
             return response.ok;
           } catch {
             return false;
@@ -26,39 +82,32 @@ export const useImageLoader = (projectFolder) => {
         };
 
         const potentialImages = Array.from(
-          { length: 30 }, // Reduced from 50 to 30 for better performance
+          { length: 30 },
           (_, i) => `${projectFolder}/${i + 1}.jpg`
         );
 
-        const existencePromises = potentialImages.map(async (path) => {
-          const exists = await imageExists(path);
-          return exists ? path : null;
-        });
-
-        const imagePaths = (await Promise.all(existencePromises)).filter(Boolean);
-
-        const imagePromises = imagePaths.map(
-          (src) =>
-            new Promise((resolve) => {
-              const img = new Image();
-              img.src = src;
-              img.onload = () => resolve(src);
-              img.onerror = () => resolve(null);
-            })
+        // Check existence in parallel
+        const existenceChecks = await Promise.all(
+          potentialImages.map((path) => checkImageExists(path))
         );
+        const validPaths = potentialImages.filter((_, i) => existenceChecks[i]);
 
-        const loadedImages = (await Promise.all(imagePromises)).filter(Boolean);
-        setImages(loadedImages);
+        // Start loading images in batches
+        if (validPaths.length > 0) {
+          loadImageBatch(validPaths, 0);
+          setImagesLoaded(true);
+        } else {
+          setImagesLoaded(true);
+        }
       } catch (err) {
         setError(err.message);
         setImages([]);
-      } finally {
         setImagesLoaded(true);
       }
     };
 
     loadImages();
-  }, [projectFolder]);
+  }, [projectFolder, loadImageBatch]);
 
   return { images, imagesLoaded, error };
 };

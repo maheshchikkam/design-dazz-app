@@ -1,27 +1,145 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-const ImageModal = ({ image, onClose }) => (
-  <div
-    className="fixed inset-0 bg-black/95 z-50 backdrop-blur-sm flex items-center justify-center p-4"
-    onClick={onClose}
-  >
-    <button
-      className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors"
+const generateBlurDataUrl = () => {
+  const svg = `
+    <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+      </filter>
+      <rect width="100%" height="100%" fill="#cccccc" filter="url(#blur)"/>
+    </svg>
+  `;
+  return `data:image/svg+xml;base64,${btoa(svg)}`;
+};
+
+const ImageModal = ({ image, onClose }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/95 z-50 backdrop-blur-sm flex items-center justify-center p-4"
       onClick={onClose}
     >
-      ×
-    </button>
-    <img
-      src={image}
-      alt="Enlarged view"
-      loading="lazy"
-      className="max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl transform transition-transform duration-300 scale-95 hover:scale-100"
-    />
-  </div>
-);
+      <button
+        className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors"
+        onClick={onClose}
+      >
+        ×
+      </button>
+      <div className="relative">
+        <img
+          src={generateBlurDataUrl()}
+          alt="Placeholder"
+          className={`max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl ${
+            isLoaded ? 'hidden' : 'block'
+          }`}
+        />
+        <img
+          src={image}
+          alt="Enlarged view"
+          loading="lazy"
+          onLoad={() => setIsLoaded(true)}
+          className={`max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl transform transition-all duration-500 ${
+            isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
+        />
+      </div>
+    </div>
+  );
+};
+
+const ProgressiveImage = ({ src, alt, onClick, height }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const imageRef = React.useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '50px',
+      }
+    );
+
+    if (imageRef.current) {
+      observer.observe(imageRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={imageRef}
+      className="relative group overflow-hidden rounded-lg mb-4 cursor-pointer break-inside-avoid transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
+      onClick={onClick}
+    >
+      <img
+        src={generateBlurDataUrl()}
+        alt={alt}
+        className={`w-full object-cover transition-opacity duration-500 ${
+          isLoaded ? 'opacity-0' : 'opacity-100'
+        }`}
+        style={{
+          position: 'absolute',
+          height: height,
+          borderRadius: '12px',
+        }}
+      />
+      {isVisible && (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          onLoad={() => setIsLoaded(true)}
+          className={`w-full object-cover transition-all duration-500 group-hover:brightness-110 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{
+            height: height,
+            borderRadius: '12px',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          }}
+        />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <span className="text-sm font-medium">Click to view full size</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ImageGallery = ({ images, imagesLoaded }) => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [displayedImages, setDisplayedImages] = useState([]);
+  const batchSize = 6;
+
+  useEffect(() => {
+    if (images.length > 0) {
+      setDisplayedImages(images.slice(0, batchSize));
+    }
+  }, [images]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1000) {
+        setDisplayedImages((prev) => {
+          const nextBatch = images.slice(0, prev.length + batchSize);
+          return Array.from(new Set([...prev, ...nextBatch]));
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [images]);
 
   if (!imagesLoaded) {
     return (
@@ -52,30 +170,14 @@ const ImageGallery = ({ images, imagesLoaded }) => {
           imagesLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        {images.map((img, idx) => (
-          <div
-            key={idx}
-            className="relative group overflow-hidden rounded-lg mb-4 cursor-pointer break-inside-avoid transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
+        {displayedImages.map((img, idx) => (
+          <ProgressiveImage
+            key={img}
+            src={img}
+            alt={`Project screenshot ${idx + 1}`}
             onClick={() => setSelectedImage(img)}
-          >
-            <img
-              src={img}
-              alt={`Project screenshot ${idx + 1}`}
-              loading="lazy"
-              className="w-full object-cover transition-all duration-300 group-hover:brightness-110"
-              style={{
-                display: 'block',
-                height: `${300 + Math.floor(Math.random() * 200)}px`,
-                borderRadius: '12px',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300">
-              <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <span className="text-sm font-medium">Click to view full size</span>
-              </div>
-            </div>
-          </div>
+            height={`${300 + Math.floor(Math.random() * 200)}px`}
+          />
         ))}
       </div>
 

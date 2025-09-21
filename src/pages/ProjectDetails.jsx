@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProjectById } from '../data/portfolioData';
 import ProjectInfo from '../components/features/ProjectInfo';
@@ -8,10 +8,40 @@ import { useImageLoader } from '../hooks/useImageLoader';
 // Lazy load the ImageGallery component
 const ImageGallery = lazy(() => import('../components/features/ImageGallery'));
 
+const LoadingFallback = () => (
+  <div className="text-primary text-center py-12 animate-pulse">
+    <div className="h-64 bg-gray-200 rounded-lg mb-4"></div>
+    <div className="h-64 bg-gray-200 rounded-lg mb-4"></div>
+    <div className="h-64 bg-gray-200 rounded-lg"></div>
+  </div>
+);
+
 const ProjectDetails = () => {
   const { projectId } = useParams();
   const project = getProjectById(projectId);
-  const { images, imagesLoaded, error } = useImageLoader(project?.projectFolder);
+  const { images, imagesLoaded, error, loadedCount } = useImageLoader(project?.projectFolder);
+
+  // Prefetch next and previous projects' images
+  useEffect(() => {
+    if (project) {
+      const preloadNextPrev = async () => {
+        const projects = Object.values(getProjectById());
+        const currentIndex = projects.findIndex((p) => p.id === project.id);
+        const nextProject = projects[(currentIndex + 1) % projects.length];
+        const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+
+        // Preload first image of next and previous projects
+        [nextProject, prevProject].forEach((p) => {
+          if (p?.projectFolder) {
+            const img = new Image();
+            img.src = `${p.projectFolder}/1.jpg`;
+          }
+        });
+      };
+
+      preloadNextPrev();
+    }
+  }, [project]);
 
   if (!project) {
     return (
@@ -40,9 +70,11 @@ const ProjectDetails = () => {
           </div>
         )}
 
-        <Suspense
-          fallback={<div className="text-primary text-center py-12">Loading gallery...</div>}
-        >
+        {imagesLoaded && loadedCount === 0 && (
+          <div className="text-primary text-center py-8">No images available for this project.</div>
+        )}
+
+        <Suspense fallback={<LoadingFallback />}>
           <ImageGallery images={images} imagesLoaded={imagesLoaded} />
         </Suspense>
 
