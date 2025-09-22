@@ -96,7 +96,7 @@ export default function Header() {
             <NavLink to="/">
               <Logo />
             </NavLink>
-            <NavLink to="/" className="flex flex-col items-start ml-3 text-sm font-bold">
+            <NavLink to="/" className="flex flex-col items-start ml-2 text-sm font-bold">
               <span>DESIGN</span>
               <span>DAZZ</span>
             </NavLink>
