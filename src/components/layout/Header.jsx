@@ -37,12 +37,12 @@ export default function Header() {
       {/* Desktop Header */}
       <div className="hidden md:h-[130px] md:flex">
         <div className="h-full w-[30%] flex flex-row items-center justify-start bg-primary text-white pl-8">
-          <NavLink to="/">
+          <NavLink to="/" className="flex flex-row">
             <Logo />
-          </NavLink>
-          <NavLink to="/" className="flex flex-col items-start justify-center ml-4">
-            <span className="font-bold">DESIGN</span>
-            <span className="font-bold">DAZZ</span>
+            <div className="flex flex-col items-start justify-center ml-2">
+              <span className="font-bold">DESIGN</span>
+              <span className="font-bold">DAZZ</span>
+            </div>
           </NavLink>
         </div>
         <div className="h-full w-[70%] flex flex-row items-center justify-between bg-secondary font-normal px-[10%]">
