@@ -31,6 +31,18 @@ export default function Portfolio() {
         'Complete room design of a 1200 sq ft living space with contemporary design elements.',
       tags: ['Modern', 'Minimalist', 'Living Room'],
     },
+    {
+      id: 3,
+      title: 'Nyla',
+      category: 'residential',
+      location: 'Hyderabad, TG',
+      year: '2025',
+      budget: '20,000',
+      image: '/images/project-3/1.jpg',
+      description:
+        'Complete room design of a 1200 sq ft living space with contemporary design elements.',
+      tags: ['Modern', 'Minimalist', 'Living Room'],
+    },
   ];
 
   const categories = [

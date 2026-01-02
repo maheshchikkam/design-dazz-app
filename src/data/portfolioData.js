@@ -21,6 +21,17 @@ export const portfolioItems = [
     description: 'Complete design of a 1200 sq ft living space with contemporary design elements.',
     tags: ['Modern', 'Minimalist', 'Living Room'],
   },
+  {
+    id: 3,
+    projectFolder: '/images/project-3',
+    title: 'Nyla',
+    category: 'residential',
+    location: 'Hyderabad, TG',
+    year: '2025',
+    budget: '20,000',
+    description: 'Complete design of a 1200 sq ft living space with contemporary design elements.',
+    tags: ['Modern', 'Minimalist', 'Living Room'],
+  },
 ];
 
 export const getProjectById = (id) => portfolioItems.find((p) => p.id === Number(id));
