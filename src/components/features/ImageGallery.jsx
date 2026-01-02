@@ -48,123 +48,71 @@ const ImageModal = ({ image, onClose }) => {
   );
 };
 
-const ProgressiveImage = ({ src, alt, onClick, height }) => {
+const CarouselImage = ({ src, alt, onClick }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const imageRef = React.useRef();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        rootMargin: '50px',
-      }
-    );
-
-    if (imageRef.current) {
-      observer.observe(imageRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div
-      ref={imageRef}
-      className="relative group overflow-hidden rounded-lg mb-4 cursor-pointer break-inside-avoid will-change-transform"
-      style={{
-        transform: 'translate3d(0, 0, 0)',
-        transition: 'transform 0.3s ease-out',
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.transform = 'translate3d(0, -4px, 0)')}
-      onMouseLeave={(e) => (e.currentTarget.style.transform = 'translate3d(0, 0, 0)')}
+      className="relative w-full h-full flex items-center justify-center cursor-pointer group"
       onClick={onClick}
     >
       <img
         src={generateBlurDataUrl()}
         alt={alt}
-        className={`w-full object-cover will-change-opacity`}
+        className="w-full h-full object-contain rounded-lg"
         style={{
           position: 'absolute',
-          height: height,
-          borderRadius: '12px',
           opacity: isLoaded ? 0 : 1,
           transition: 'opacity 0.5s ease-out',
         }}
       />
-      {isVisible && (
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          onLoad={() => setIsLoaded(true)}
-          className="w-full object-cover will-change-[opacity,filter]"
-          style={{
-            height: height,
-            borderRadius: '12px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-            opacity: isLoaded ? 1 : 0,
-            transition: 'opacity 0.5s ease-out, filter 0.3s ease-out',
-            filter: 'brightness(100%)',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.filter = 'brightness(110%)')}
-          onMouseLeave={(e) => (e.currentTarget.style.filter = 'brightness(100%)')}
-        />
-      )}
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 will-change-opacity"
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setIsLoaded(true)}
+        className="w-full h-full object-contain rounded-lg shadow-2xl"
         style={{
-          opacity: 0,
-          transition: 'opacity 0.3s ease-out',
+          opacity: isLoaded ? 1 : 0,
+          transition: 'opacity 0.5s ease-out, filter 0.3s ease-out',
+          filter: 'brightness(100%)',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.opacity = 1)}
-        onMouseLeave={(e) => (e.currentTarget.style.opacity = 0)}
-      >
-        <div
-          className="absolute bottom-0 left-0 right-0 p-4 text-white will-change-transform"
-          style={{
-            transform: 'translateY(16px)',
-            transition: 'transform 0.3s ease-out',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(16px)')}
-        >
-          <span className="text-sm font-medium">Click to view full size</span>
-        </div>
+        onMouseEnter={(e) => (e.currentTarget.style.filter = 'brightness(110%)')}
+        onMouseLeave={(e) => (e.currentTarget.style.filter = 'brightness(100%)')}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center">
+        <span className="text-white text-sm font-medium mb-4">Click to view full size</span>
       </div>
     </div>
   );
 };
 
 const ImageGallery = ({ images, imagesLoaded }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [displayedImages, setDisplayedImages] = useState([]);
-  const batchSize = 6;
 
-  useEffect(() => {
-    if (images.length > 0) {
-      setDisplayedImages(images.slice(0, batchSize));
-    }
-  }, [images]);
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+  };
 
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const goToImage = (index) => {
+    setCurrentIndex(index);
+  };
+
+  // Handle keyboard navigation
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1000) {
-        setDisplayedImages((prev) => {
-          const nextBatch = images.slice(0, prev.length + batchSize);
-          return Array.from(new Set([...prev, ...nextBatch]));
-        });
-      }
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') goToPrevious();
+      if (e.key === 'ArrowRight') goToNext();
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [images]);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [images.length]);
 
   if (!imagesLoaded) {
     return (
@@ -178,34 +126,75 @@ const ImageGallery = ({ images, imagesLoaded }) => {
     return <div className="text-center py-8">No images available for this project.</div>;
   }
 
+  const currentImage = images[currentIndex];
+
   return (
-    <div
-      className="mb-8 w-screen max-w-none relative left-1/2 right-1/2 -mx-[50vw]"
-      style={{
-        position: 'relative',
-        left: '50%',
-        right: '50%',
-        marginLeft: '-50vw',
-        marginRight: '-50vw',
-        width: '100vw',
-      }}
-    >
+    <div className="mb-8">
+      {/* Main Carousel */}
       <div
-        className={`columns-1 sm:columns-2 md:columns-3 gap-4 px-4 transition-opacity duration-500 ${
-          imagesLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
+        className="relative bg-black/5 rounded-lg overflow-hidden mb-6"
+        style={{
+          aspectRatio: '16 / 9',
+        }}
       >
-        {displayedImages.map((img, idx) => (
-          <ProgressiveImage
+        <CarouselImage
+          src={currentImage}
+          alt={`Project screenshot ${currentIndex + 1}`}
+          onClick={() => setSelectedImage(currentImage)}
+        />
+
+        {/* Previous Button */}
+        <button
+          onClick={goToPrevious}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-all duration-200 group"
+          aria-label="Previous image"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        {/* Next Button */}
+        <button
+          onClick={goToNext}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-all duration-200 group"
+          aria-label="Next image"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* Image Counter */}
+        <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium">
+          {currentIndex + 1} / {images.length}
+        </div>
+      </div>
+
+      {/* Thumbnail Navigation */}
+      <div className="flex gap-2 overflow-x-auto pb-2 px-1">
+        {images.map((img, idx) => (
+          <button
             key={img}
-            src={img}
-            alt={`Project screenshot ${idx + 1}`}
-            onClick={() => setSelectedImage(img)}
-            height={`${300 + Math.floor(Math.random() * 200)}px`}
-          />
+            onClick={() => goToImage(idx)}
+            className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden transition-all duration-200 border-2 ${
+              idx === currentIndex
+                ? 'border-primary ring-2 ring-primary/50'
+                : 'border-gray-300 hover:border-primary'
+            }`}
+            aria-label={`Go to image ${idx + 1}`}
+          >
+            <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+          </button>
         ))}
       </div>
 
+      {/* Modal for full size view */}
       {selectedImage && <ImageModal image={selectedImage} onClose={() => setSelectedImage(null)} />}
     </div>
   );
