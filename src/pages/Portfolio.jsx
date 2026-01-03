@@ -32,10 +32,26 @@ const PORTFOLIO_STATS = [
  * Design process steps configuration
  */
 const DESIGN_PROCESS = [
-  { step: 1, title: 'Discovery', description: 'Understanding your needs, lifestyle, and design preferences' },
-  { step: 2, title: 'Design', description: 'Creating detailed plans and 3D visualizations of your space' },
-  { step: 3, title: 'Development', description: 'Sourcing materials and coordinating with contractors' },
-  { step: 4, title: 'Delivery', description: 'Final installation and styling of your transformed space' },
+  {
+    step: 1,
+    title: 'Discovery',
+    description: 'Understanding your needs, lifestyle, and design preferences',
+  },
+  {
+    step: 2,
+    title: 'Design',
+    description: 'Creating detailed plans and 3D visualizations of your space',
+  },
+  {
+    step: 3,
+    title: 'Development',
+    description: 'Sourcing materials and coordinating with contractors',
+  },
+  {
+    step: 4,
+    title: 'Delivery',
+    description: 'Final installation and styling of your transformed space',
+  },
 ];
 
 /**
@@ -74,7 +90,6 @@ const PortfolioCard = ({ item }) => {
           className={`w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ${
             !imageLoaded || imageError ? 'hidden' : 'block'
           }`}
-          loading="lazy"
         />
 
         {/* Category Badge */}
@@ -264,9 +279,7 @@ export default function Portfolio() {
         {!loading && !error && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredItems.length > 0 ? (
-              filteredItems.map((item) => (
-                <PortfolioCard key={item.id} item={item} />
-              ))
+              filteredItems.map((item) => <PortfolioCard key={item.id} item={item} />)
             ) : (
               <div className="col-span-full text-center py-12">
                 <p className="text-brown text-lg">No projects found in this category.</p>

@@ -1,11 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { PortfolioContext } from './PortfolioContextDef';
 import { fetchWithRetry, normalizePortfolioData } from '../utils/apiClient';
-import {
-  getCachedPortfolio,
-  setPortfolioCache,
-  clearPortfolioCache,
-} from '../utils/cacheUtils';
+import { getCachedPortfolio, setPortfolioCache, clearPortfolioCache } from '../utils/cacheUtils';
 import { getErrorMessage, logError } from '../utils/errorUtils';
 import { API_CONFIG } from '../constants';
 
@@ -92,9 +88,5 @@ export const PortfolioProvider = ({ children }) => {
     [portfolioItems, loading, error, isCached, fetchPortfolioData, clearAndRefetch]
   );
 
-  return (
-    <PortfolioContext.Provider value={value}>
-      {children}
-    </PortfolioContext.Provider>
-  );
+  return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
 };

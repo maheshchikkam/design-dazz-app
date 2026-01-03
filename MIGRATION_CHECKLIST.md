@@ -11,42 +11,46 @@ Use this checklist when updating code to follow the new refactored patterns.
 ### For New Components
 
 - [ ] Import constants instead of hardcoding values
+
   ```javascript
   // ❌ Before
   const routes = ['/', '/portfolio', '/about'];
-  
+
   // ✅ After
   import { ROUTES } from '../constants';
   const routes = Object.values(ROUTES);
   ```
 
 - [ ] Use reusable UI components
+
   ```javascript
   // ❌ Before
-  <button className="bg-primary text-white px-4 py-2 rounded">Click</button>
-  
+  <button className="bg-primary text-white px-4 py-2 rounded">Click</button>;
+
   // ✅ After
   import Button from '../components/common/Button';
-  <Button variant="primary">Click</Button>
+  <Button variant="primary">Click</Button>;
   ```
 
 - [ ] Use utility functions for common tasks
+
   ```javascript
   // ❌ Before
   const badgeClass = category === 'residential' ? 'bg-primary text-white' : 'bg-brown text-white';
-  
+
   // ✅ After
   import { getCategoryBadgeClass } from '../utils/classNameUtils';
   const badgeClass = getCategoryBadgeClass(category);
   ```
 
 - [ ] Handle errors with error utilities
+
   ```javascript
   // ❌ Before
   catch (err) {
     setError(err.message || 'Something went wrong');
   }
-  
+
   // ✅ After
   import { getErrorMessage, logError } from '../utils/errorUtils';
   catch (err) {
@@ -59,30 +63,33 @@ Use this checklist when updating code to follow the new refactored patterns.
 ### For API Calls
 
 - [ ] Use fetchWithRetry instead of fetch
+
   ```javascript
   // ❌ Before
   const response = await fetch(API_URL);
-  
+
   // ✅ After
   import { fetchWithRetry } from '../utils/apiClient';
   const data = await fetchWithRetry(API_URL);
   ```
 
 - [ ] Normalize data after fetching
+
   ```javascript
   // ❌ Before
   const items = Array.isArray(data) ? data : data.projects || [];
-  
+
   // ✅ After
   import { normalizePortfolioData } from '../utils/apiClient';
   const items = normalizePortfolioData(data);
   ```
 
 - [ ] Use caching utilities
+
   ```javascript
   // ❌ Before
   // No caching logic
-  
+
   // ✅ After
   import { getCachedPortfolio, setPortfolioCache } from '../utils/cacheUtils';
   const cached = getCachedPortfolio();
@@ -94,72 +101,95 @@ Use this checklist when updating code to follow the new refactored patterns.
 ### For Navigation
 
 - [ ] Use route constants
+
   ```javascript
   // ❌ Before
-  <NavLink to="/portfolio" />
-  
+  <NavLink to="/portfolio" />;
+
   // ✅ After
   import { ROUTES } from '../constants';
-  <NavLink to={ROUTES.PORTFOLIO} />
+  <NavLink to={ROUTES.PORTFOLIO} />;
   ```
 
 - [ ] Configuration-driven lists
+
   ```javascript
   // ❌ Before
   const items = [
     { name: 'Home', path: '/' },
     { name: 'Portfolio', path: '/portfolio' },
   ];
-  
+
   // ✅ After
   const NAV_ITEMS = [
     { label: 'Home', path: ROUTES.HOME },
     { label: 'Portfolio', path: ROUTES.PORTFOLIO },
   ];
-  items.map(item => <NavLink key={item.path} to={item.path}>{item.label}</NavLink>)
+  items.map((item) => (
+    <NavLink key={item.path} to={item.path}>
+      {item.label}
+    </NavLink>
+  ));
   ```
 
 ### For Loading States
 
 - [ ] Use LoadingSpinner component
+
   ```javascript
   // ❌ Before
-  {loading && <div>Loading...</div>}
-  
+  {
+    loading && <div>Loading...</div>;
+  }
+
   // ✅ After
   import LoadingSpinner from '../components/common/LoadingSpinner';
-  {loading && <LoadingSpinner message="Loading..." fullScreen={false} />}
+  {
+    loading && <LoadingSpinner message="Loading..." fullScreen={false} />;
+  }
   ```
 
 - [ ] Use SkeletonLoader for placeholders
+
   ```javascript
   // ❌ Before
-  {loading && (
-    <div className="grid...">
-      {[...Array(6)].map((_, i) => <div key={i} className="animate-pulse..." />)}
-    </div>
-  )}
-  
+  {
+    loading && (
+      <div className="grid...">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="animate-pulse..." />
+        ))}
+      </div>
+    );
+  }
+
   // ✅ After
   import SkeletonLoader from '../components/common/SkeletonLoader';
-  {loading && <SkeletonLoader count={6} columns={3} />}
+  {
+    loading && <SkeletonLoader count={6} columns={3} />;
+  }
   ```
 
 ### For Error States
 
 - [ ] Use ErrorMessage component
+
   ```javascript
   // ❌ Before
-  {error && (
-    <div className="bg-red-100...">
-      <p>{error}</p>
-      <button onClick={onRetry}>Retry</button>
-    </div>
-  )}
-  
+  {
+    error && (
+      <div className="bg-red-100...">
+        <p>{error}</p>
+        <button onClick={onRetry}>Retry</button>
+      </div>
+    );
+  }
+
   // ✅ After
   import ErrorMessage from '../components/common/ErrorMessage';
-  {error && <ErrorMessage message={error} onRetry={onRetry} />}
+  {
+    error && <ErrorMessage message={error} onRetry={onRetry} />;
+  }
   ```
 
 ---
@@ -181,13 +211,13 @@ src/
 
 ### Naming Conventions
 
-| Type | Pattern | Example |
-|------|---------|---------|
-| Components | PascalCase | `PortfolioCard.jsx` |
-| Hooks | camelCase with 'use' prefix | `usePortfolio.js` |
-| Utilities | camelCase | `apiClient.js` |
-| Constants | UPPER_CASE | `ROUTES`, `API_CONFIG` |
-| Contexts | PascalCase with 'Context' suffix | `PortfolioContext.jsx` |
+| Type       | Pattern                          | Example                |
+| ---------- | -------------------------------- | ---------------------- |
+| Components | PascalCase                       | `PortfolioCard.jsx`    |
+| Hooks      | camelCase with 'use' prefix      | `usePortfolio.js`      |
+| Utilities  | camelCase                        | `apiClient.js`         |
+| Constants  | UPPER_CASE                       | `ROUTES`, `API_CONFIG` |
+| Contexts   | PascalCase with 'Context' suffix | `PortfolioContext.jsx` |
 
 ---
 
@@ -196,12 +226,14 @@ src/
 When creating a new component:
 
 ### Planning
+
 - [ ] Define component responsibilities
 - [ ] Identify reusable sub-components
 - [ ] Plan prop interface
 - [ ] Check if similar component exists
 
 ### Implementation
+
 - [ ] Add JSDoc comment at top
 - [ ] Define prop types in comments
 - [ ] Extract magic strings to constants
@@ -211,6 +243,7 @@ When creating a new component:
 - [ ] Add accessibility attributes
 
 ### Example Template
+
 ```javascript
 /**
  * MyComponent
@@ -294,6 +327,7 @@ When refactoring existing code:
 ## 📚 Common Patterns
 
 ### Pattern 1: Data Fetching with Loading & Error
+
 ```javascript
 const [data, setData] = useState(null);
 const [loading, setLoading] = useState(false);
@@ -321,6 +355,7 @@ return <div>{/* render data */}</div>;
 ```
 
 ### Pattern 2: Configuration-Driven Lists
+
 ```javascript
 const ITEMS = [
   { id: 'item1', label: 'Item 1', value: 'value1' },
@@ -329,7 +364,7 @@ const ITEMS = [
 
 return (
   <div>
-    {ITEMS.map(item => (
+    {ITEMS.map((item) => (
       <Component key={item.id} {...item} />
     ))}
   </div>
@@ -337,6 +372,7 @@ return (
 ```
 
 ### Pattern 3: Reusable Form Component
+
 ```javascript
 const FormField = ({ label, error, ...props }) => (
   <div className="form-group">
@@ -351,18 +387,18 @@ const FormField = ({ label, error, ...props }) => (
 
 ## ⚠️ Common Mistakes to Avoid
 
-| ❌ Don't | ✅ Do |
-|----------|-------|
-| Hardcode API URLs | Use `API_CONFIG.PORTFOLIO_URL` |
-| Repeat button styles | Use `<Button />` component |
+| ❌ Don't                         | ✅ Do                              |
+| -------------------------------- | ---------------------------------- |
+| Hardcode API URLs                | Use `API_CONFIG.PORTFOLIO_URL`     |
+| Repeat button styles             | Use `<Button />` component         |
 | String comparison for categories | Use `PROJECT_CATEGORIES` constants |
-| Custom loading spinners | Use `<LoadingSpinner />` |
-| Inline error handling | Use `getErrorMessage()` utility |
-| Magic numbers/strings | Define as constants |
-| Large monolithic components | Split into sub-components |
-| Missing error boundaries | Wrap with `<ErrorBoundary />` |
-| No loading/error states | Always handle all states |
-| Hardcoded routes | Use `ROUTES` constants |
+| Custom loading spinners          | Use `<LoadingSpinner />`           |
+| Inline error handling            | Use `getErrorMessage()` utility    |
+| Magic numbers/strings            | Define as constants                |
+| Large monolithic components      | Split into sub-components          |
+| Missing error boundaries         | Wrap with `<ErrorBoundary />`      |
+| No loading/error states          | Always handle all states           |
+| Hardcoded routes                 | Use `ROUTES` constants             |
 
 ---
 

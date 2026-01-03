@@ -85,12 +85,7 @@ class ErrorBoundary extends Component {
             )}
 
             <div className="flex gap-3">
-              <Button
-                variant="primary"
-                size="full"
-                onClick={this.handleReset}
-                className="flex-1"
-              >
+              <Button variant="primary" size="full" onClick={this.handleReset} className="flex-1">
                 Try Again
               </Button>
               <Button

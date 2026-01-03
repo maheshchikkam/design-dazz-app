@@ -5,8 +5,7 @@ import React from 'react';
  * Reusable navigation link with active state styling
  */
 const NavLinkItem = ({ to: href, isActive = false, children, onClick = null, className = '' }) => {
-  const baseClass =
-    'transition-colors duration-200 cursor-pointer hover:text-primary';
+  const baseClass = 'transition-colors duration-200 cursor-pointer hover:text-primary';
   const activeClass = isActive ? 'text-primary font-semibold' : 'text-brown';
 
   return (

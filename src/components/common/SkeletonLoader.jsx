@@ -5,11 +5,12 @@ import React from 'react';
  * Reusable skeleton loading placeholder
  */
 const SkeletonLoader = ({ count = 6, columns = 3 }) => {
-  const gridClass = {
-    1: 'grid-cols-1',
-    2: 'grid-cols-1 md:grid-cols-2',
-    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-  }[columns] || 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+  const gridClass =
+    {
+      1: 'grid-cols-1',
+      2: 'grid-cols-1 md:grid-cols-2',
+      3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+    }[columns] || 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
 
   return (
     <div className={`grid ${gridClass} gap-8`}>

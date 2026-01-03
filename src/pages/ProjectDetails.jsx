@@ -134,13 +134,13 @@ const ProjectDetails = () => {
     return (
       <div className="bg-secondary min-h-screen w-full">
         <div className="max-w-4xl mx-auto p-6">
-          <Link to={ROUTES.PORTFOLIO} className="text-primary underline text-base mb-4 inline-block">
+          <Link
+            to={ROUTES.PORTFOLIO}
+            className="text-primary underline text-base mb-4 inline-block"
+          >
             &larr; Back to Portfolio
           </Link>
-          <ErrorMessage
-            message={error || 'Project not found'}
-            onRetry={handleRetry}
-          />
+          <ErrorMessage message={error || 'Project not found'} onRetry={handleRetry} />
         </div>
       </div>
     );

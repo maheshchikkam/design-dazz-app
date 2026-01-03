@@ -21,9 +21,7 @@ export const cn = (...classes) => {
  */
 export const getCategoryBadgeClass = (category) => {
   const baseClass = 'px-3 py-1 rounded-full text-sm font-medium text-white';
-  return category === 'residential'
-    ? cn(baseClass, 'bg-primary')
-    : cn(baseClass, 'bg-brown');
+  return category === 'residential' ? cn(baseClass, 'bg-primary') : cn(baseClass, 'bg-brown');
 };
 
 /**

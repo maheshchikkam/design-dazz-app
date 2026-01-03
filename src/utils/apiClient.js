@@ -34,9 +34,7 @@ export const fetchWithRetry = async (url, retries = API_CONFIG.RETRY_ATTEMPTS) =
 
       // Don't retry on abort or parse errors
       if (error.name === 'AbortError' && i < retries - 1) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, API_CONFIG.RETRY_DELAY * (i + 1))
-        );
+        await new Promise((resolve) => setTimeout(resolve, API_CONFIG.RETRY_DELAY * (i + 1)));
         continue;
       }
 
@@ -45,9 +43,7 @@ export const fetchWithRetry = async (url, retries = API_CONFIG.RETRY_ATTEMPTS) =
       }
 
       // Exponential backoff before retry
-      await new Promise((resolve) =>
-        setTimeout(resolve, API_CONFIG.RETRY_DELAY * Math.pow(2, i))
-      );
+      await new Promise((resolve) => setTimeout(resolve, API_CONFIG.RETRY_DELAY * Math.pow(2, i)));
     }
   }
 

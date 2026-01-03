@@ -1,16 +1,19 @@
 # Code Refactoring Documentation
 
 ## Overview
+
 This document outlines the comprehensive refactoring of the Design Dazz application for improved **code reusability**, **performance**, and **scalability**.
 
 ---
 
 ## Key Improvements
 
-### 1. **Centralized Constants** 
+### 1. **Centralized Constants**
+
 **File:** `src/constants/index.js`
 
 Consolidated all magic strings and configuration values into a single source of truth:
+
 - API endpoints and timeouts
 - Route paths
 - Category definitions
@@ -19,11 +22,13 @@ Consolidated all magic strings and configuration values into a single source of 
 - Local storage keys
 
 **Benefits:**
+
 - Single point of change for configuration
 - Type-safe references across the app
 - Easier maintenance and testing
 
 **Usage:**
+
 ```javascript
 import { ROUTES, API_CONFIG } from '../constants';
 ```
@@ -33,46 +38,55 @@ import { ROUTES, API_CONFIG } from '../constants';
 ### 2. **Utility Functions**
 
 #### **API Client** (`src/utils/apiClient.js`)
+
 - `fetchWithRetry()` - Intelligent retry logic with exponential backoff
 - `normalizePortfolioData()` - Data normalization for flexible API responses
 - `findProjectById()` - Reusable project search utility
 
 **Benefits:**
+
 - Centralized API logic
 - Automatic retry on network failures
 - Consistent error handling
 
 #### **Caching** (`src/utils/cacheUtils.js`)
+
 - Local storage caching with TTL
 - Automatic cache expiration
 - Fallback cache on network failure
 
 **Usage:**
+
 ```javascript
 import { getCachedPortfolio, setPortfolioCache } from '../utils/cacheUtils';
 ```
 
 #### **Image Utilities** (`src/utils/imageUtils.js`)
+
 - Image preloading
 - URL validation
 - Alt text generation
 
 #### **Error Handling** (`src/utils/errorUtils.js`)
+
 - User-friendly error messages
 - Structured error logging
 - Data validation
 
 #### **CSS Classes** (`src/utils/classNameUtils.js`)
+
 - `cn()` - Class name combining utility
 - Reusable component style patterns
 - Badge and nav link styles
 
 #### **Performance** (`src/utils/performanceUtils.js`)
+
 - Render time measurement
 - Web Vitals reporting
 - Debounce and throttle utilities
 
 **Benefits:**
+
 - DRY principle - eliminates repeated utility logic
 - Easy to test and maintain
 - Composable functions
@@ -84,37 +98,44 @@ import { getCachedPortfolio, setPortfolioCache } from '../utils/cacheUtils';
 #### **Common Components** (`src/components/common/`)
 
 **LoadingSpinner.jsx**
+
 - Customizable loading indicator
 - Optional full-screen mode
 - Consistent across the app
 
 **ErrorMessage.jsx**
+
 - Standardized error display
 - Built-in retry button
 - User-friendly messaging
 
 **SkeletonLoader.jsx**
+
 - Configurable skeleton placeholders
 - Grid support (1, 2, 3 columns)
 - Better UX during loading
 
 **Button.jsx**
+
 - 4 variants: primary, secondary, danger, outline
 - 4 sizes: sm, md, lg, full
 - Accessibility features
 
 **NavLinkItem.jsx**
+
 - Reusable navigation link
 - Active state styling
 - Accessibility support
 
 **ErrorBoundary.jsx**
+
 - Catches component errors
 - User-friendly error UI
 - Error logging capability
 - Recovery options
 
 **Benefits:**
+
 - Consistency across the app
 - Reduced code duplication
 - Easier theme/style updates
@@ -125,12 +146,14 @@ import { getCachedPortfolio, setPortfolioCache } from '../utils/cacheUtils';
 ### 4. **Refactored Components**
 
 #### **Header.jsx**
+
 - Extracted sub-components: `DesktopNav`, `MobileHeader`, `MobileMenu`
 - Centralized navigation configuration
 - Uses constants for routes
 - Improved performance with `useCallback`
 
 **Before:**
+
 ```javascript
 // Repeated NavLink components for each route
 <NavLink to="/" className={...}>Home</NavLink>
@@ -139,6 +162,7 @@ import { getCachedPortfolio, setPortfolioCache } from '../utils/cacheUtils';
 ```
 
 **After:**
+
 ```javascript
 const NAV_ITEMS = [
   { path: ROUTES.HOME, label: 'Home' },
@@ -146,10 +170,15 @@ const NAV_ITEMS = [
   // ...
 ];
 
-NAV_ITEMS.map(item => <NavLink key={item.path} to={item.path}>{item.label}</NavLink>)
+NAV_ITEMS.map((item) => (
+  <NavLink key={item.path} to={item.path}>
+    {item.label}
+  </NavLink>
+));
 ```
 
 #### **Portfolio.jsx**
+
 - Configuration-driven filtering
 - Extracted sub-components: `FilterButton`, `StatsSection`, `CTASection`, `ProcessSection`
 - Uses `useMemo` for filtered items
@@ -157,11 +186,13 @@ NAV_ITEMS.map(item => <NavLink key={item.path} to={item.path}>{item.label}</NavL
 - Memoized callbacks
 
 **Performance Improvements:**
+
 - Images load lazily with `loading="lazy"`
 - Filtered results memoized to prevent unnecessary recalculations
 - Component extraction prevents unnecessary re-renders
 
 #### **ProjectDetails.jsx**
+
 - Extracted sub-components: `ProjectHeader`, `ProjectDescription`, `ProjectCTASection`
 - Improved error handling with retry logic
 - Uses reusable utilities for API calls
@@ -172,6 +203,7 @@ NAV_ITEMS.map(item => <NavLink key={item.path} to={item.path}>{item.label}</NavL
 ### 5. **Enhanced Context** (`PortfolioContext.jsx`)
 
 **Improvements:**
+
 - Added caching with localStorage
 - Retry logic with exponential backoff
 - `useMemo` for value optimization
@@ -179,6 +211,7 @@ NAV_ITEMS.map(item => <NavLink key={item.path} to={item.path}>{item.label}</NavL
 - `clearAndRefetch()` method for manual refresh
 
 **Usage:**
+
 ```javascript
 const { portfolioItems, loading, error, isCached, refetch, clearAndRefetch } = usePortfolio();
 ```
@@ -188,16 +221,19 @@ const { portfolioItems, loading, error, isCached, refetch, clearAndRefetch } = u
 ### 6. **Build Optimizations** (`vite.config.js`)
 
 **Code Splitting:**
+
 - Vendor chunks (react, react-router-dom, react-icons)
 - Separate CSS bundles
 - Manual chunk management for better caching
 
 **Minification:**
+
 - Terser compression
 - Console removal in production
 - Optimized bundle size
 
 **Dependency Optimization:**
+
 - Pre-bundled common dependencies
 - Faster cold starts
 
@@ -206,28 +242,33 @@ const { portfolioItems, loading, error, isCached, refetch, clearAndRefetch } = u
 ## Scalability Improvements
 
 ### 1. **Modular Architecture**
+
 - Utilities are composable and reusable
 - Components follow single responsibility principle
 - Easy to add new features without refactoring existing code
 
 ### 2. **Configuration Management**
+
 - All constants in one place
 - Easy to add new categories, routes, or constants
 - Environment-ready (can be extended with .env support)
 
 ### 3. **Error Handling**
+
 - Global error boundary catches component errors
 - Context-level error recovery
 - User-friendly error messages
 - Structured logging for debugging
 
 ### 4. **Performance**
+
 - Lazy image loading
 - Memoization of computed values
 - Debounce/throttle utilities ready for use
 - Code splitting for faster initial load
 
 ### 5. **Testing**
+
 - Pure utility functions are easy to test
 - Configuration-driven components
 - Separated concerns make mocking easier
@@ -272,11 +313,13 @@ src/
 ## Best Practices Applied
 
 ### 1. **DRY (Don't Repeat Yourself)**
+
 - Configuration centralized
 - Utility functions replace repeated code
 - Component composition for reuse
 
 ### 2. **SOLID Principles**
+
 - **Single Responsibility**: Each component/function has one job
 - **Open/Closed**: Easy to extend without modifying existing code
 - **Liskov Substitution**: Components are interchangeable
@@ -284,18 +327,21 @@ src/
 - **Dependency Inversion**: Dependent on abstractions (utilities, constants)
 
 ### 3. **Performance**
+
 - Code splitting for faster load
 - Lazy loading of images
 - Memoization of expensive operations
 - Utility functions are pure (no side effects)
 
 ### 4. **Maintainability**
+
 - Clear naming conventions
 - Comprehensive JSDoc comments
 - Logical file organization
 - Configuration over code
 
 ### 5. **Error Handling**
+
 - Global error boundary
 - Context-level recovery
 - User-friendly messages
@@ -306,14 +352,16 @@ src/
 ## Usage Examples
 
 ### Using Constants
+
 ```javascript
 import { ROUTES, PROJECT_CATEGORIES } from '../constants';
 
-<Link to={ROUTES.PORTFOLIO} />
+<Link to={ROUTES.PORTFOLIO} />;
 const isResidential = category === PROJECT_CATEGORIES.RESIDENTIAL;
 ```
 
 ### Using Utilities
+
 ```javascript
 import { fetchWithRetry, normalizePortfolioData } from '../utils/apiClient';
 import { getCategoryBadgeClass } from '../utils/classNameUtils';
@@ -324,6 +372,7 @@ const badgeClass = getCategoryBadgeClass(category);
 ```
 
 ### Using Reusable Components
+
 ```javascript
 <Button variant="primary" size="md">Click me</Button>
 <ErrorMessage message="Something went wrong" onRetry={handleRetry} />
@@ -361,11 +410,13 @@ If you're updating from the old version:
 ## Performance Metrics
 
 ### Before
+
 - Bundle size: ~200KB
 - Time to Interactive: ~2.5s
 - Largest Contentful Paint: ~2.0s
 
 ### After (Expected)
+
 - Bundle size: ~150KB (-25%)
 - Time to Interactive: ~1.8s (-28%)
 - Largest Contentful Paint: ~1.5s (-25%)

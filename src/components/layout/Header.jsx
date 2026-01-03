@@ -72,9 +72,7 @@ const MobileHeader = ({ onMenuToggle, isIconClicked }) => (
         aria-label="Toggle menu"
         aria-expanded="false"
       >
-        <FaAlignJustify
-          className={`${isIconClicked ? 'rotate-90 scale-110' : ''}`}
-        />
+        <FaAlignJustify className={`${isIconClicked ? 'rotate-90 scale-110' : ''}`} />
       </button>
     </div>
   </div>

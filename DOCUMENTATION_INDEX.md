@@ -7,6 +7,7 @@ Welcome! This file helps you navigate the refactoring documentation.
 ## 🚀 Start Here
 
 ### First Time? Start Here:
+
 1. **Read:** [README_REFACTORING.md](./README_REFACTORING.md) - 5 min overview
 2. **Learn:** [REFACTORING.md](./REFACTORING.md) - 15 min detailed guide
 3. **Apply:** [MIGRATION_CHECKLIST.md](./MIGRATION_CHECKLIST.md) - When adding features
@@ -16,6 +17,7 @@ Welcome! This file helps you navigate the refactoring documentation.
 ## 📚 Documentation Map
 
 ### Quick Overviews
+
 - **[README_REFACTORING.md](./README_REFACTORING.md)** ⭐ START HERE
   - Executive summary
   - Key features overview
@@ -29,6 +31,7 @@ Welcome! This file helps you navigate the refactoring documentation.
   - Quick start commands
 
 ### Detailed Guides
+
 - **[REFACTORING.md](./REFACTORING.md)** - Most Comprehensive
   - Each improvement explained
   - Code examples for every change
@@ -51,24 +54,31 @@ Welcome! This file helps you navigate the refactoring documentation.
 ### "How do I...?"
 
 #### Add a new feature?
+
 → Read [MIGRATION_CHECKLIST.md](./MIGRATION_CHECKLIST.md#migration-checklist)
 
 #### Use a specific utility?
+
 → Check [REFACTORING.md](./REFACTORING.md#2-utility-functions) section 2
 
 #### Create a reusable component?
+
 → See [REFACTORING.md](./REFACTORING.md#3-reusable-ui-components) section 3
 
 #### Handle errors properly?
+
 → Look at [REFACTORING.md](./REFACTORING.md#6-error-handling) section 6
 
 #### Add a new route?
+
 → Check "Common Patterns" in [MIGRATION_CHECKLIST.md](./MIGRATION_CHECKLIST.md#common-patterns)
 
 #### Optimize performance?
+
 → See [REFACTORING.md](./REFACTORING.md#6-build-optimizations) Build Optimizations
 
 #### Get familiar with best practices?
+
 → Read [REFACTORING.md](./REFACTORING.md#best-practices-applied) Best Practices section
 
 ---
@@ -76,48 +86,56 @@ Welcome! This file helps you navigate the refactoring documentation.
 ## 📂 New Files Reference
 
 ### Utilities (`src/utils/`)
-| File | Purpose | Doc Section |
-|------|---------|-------------|
-| `apiClient.js` | API calls with retry | [Link](./REFACTORING.md#api-client) |
-| `cacheUtils.js` | Smart caching | [Link](./REFACTORING.md#caching) |
-| `classNameUtils.js` | CSS utilities | [Link](./REFACTORING.md#css-classes) |
-| `errorUtils.js` | Error handling | [Link](./REFACTORING.md#error-handling-utilities) |
-| `imageUtils.js` | Image loading | [Link](./REFACTORING.md#image-utilities) |
-| `performanceUtils.js` | Performance monitoring | [Link](./REFACTORING.md#performance) |
+
+| File                  | Purpose                | Doc Section                                       |
+| --------------------- | ---------------------- | ------------------------------------------------- |
+| `apiClient.js`        | API calls with retry   | [Link](./REFACTORING.md#api-client)               |
+| `cacheUtils.js`       | Smart caching          | [Link](./REFACTORING.md#caching)                  |
+| `classNameUtils.js`   | CSS utilities          | [Link](./REFACTORING.md#css-classes)              |
+| `errorUtils.js`       | Error handling         | [Link](./REFACTORING.md#error-handling-utilities) |
+| `imageUtils.js`       | Image loading          | [Link](./REFACTORING.md#image-utilities)          |
+| `performanceUtils.js` | Performance monitoring | [Link](./REFACTORING.md#performance)              |
 
 ### Components (`src/components/common/`)
-| File | Purpose | Doc Section |
-|------|---------|-------------|
-| `Button.jsx` | Reusable button | [Link](./REFACTORING.md#common-components) |
-| `ErrorBoundary.jsx` | Global error catching | [Link](./REFACTORING.md#common-components) |
-| `ErrorMessage.jsx` | Error display | [Link](./REFACTORING.md#common-components) |
-| `LoadingSpinner.jsx` | Loading indicator | [Link](./REFACTORING.md#common-components) |
+
+| File                 | Purpose               | Doc Section                                |
+| -------------------- | --------------------- | ------------------------------------------ |
+| `Button.jsx`         | Reusable button       | [Link](./REFACTORING.md#common-components) |
+| `ErrorBoundary.jsx`  | Global error catching | [Link](./REFACTORING.md#common-components) |
+| `ErrorMessage.jsx`   | Error display         | [Link](./REFACTORING.md#common-components) |
+| `LoadingSpinner.jsx` | Loading indicator     | [Link](./REFACTORING.md#common-components) |
 | `SkeletonLoader.jsx` | Skeleton placeholders | [Link](./REFACTORING.md#common-components) |
-| `NavLinkItem.jsx` | Navigation link | [Link](./REFACTORING.md#common-components) |
+| `NavLinkItem.jsx`    | Navigation link       | [Link](./REFACTORING.md#common-components) |
 
 ### Other
-| File | Purpose | Doc Section |
-|------|---------|-------------|
-| `src/constants/index.js` | Centralized config | [Link](./REFACTORING.md#1-centralized-constants) |
-| `src/context/PortfolioContextDef.js` | Context definition | [Link](./REFACTORING.md#enhanced-context) |
+
+| File                                 | Purpose            | Doc Section                                      |
+| ------------------------------------ | ------------------ | ------------------------------------------------ |
+| `src/constants/index.js`             | Centralized config | [Link](./REFACTORING.md#1-centralized-constants) |
+| `src/context/PortfolioContextDef.js` | Context definition | [Link](./REFACTORING.md#enhanced-context)        |
 
 ---
 
 ## 🔍 Code Examples by Topic
 
 ### Using Constants
+
 → See [REFACTORING.md](./REFACTORING.md#1-centralized-constants)
 
 ### Using Utilities
+
 → See [REFACTORING.md](./REFACTORING.md#2-utility-functions)
 
 ### Using Reusable Components
+
 → See [REFACTORING.md](./REFACTORING.md#3-reusable-ui-components)
 
 ### Configuration-Driven Patterns
+
 → See [MIGRATION_CHECKLIST.md](./MIGRATION_CHECKLIST.md#pattern-2-configuration-driven-lists)
 
 ### Error Handling Patterns
+
 → See [MIGRATION_CHECKLIST.md](./MIGRATION_CHECKLIST.md#pattern-1-data-fetching-with-loading--error)
 
 ---
@@ -127,6 +145,7 @@ Welcome! This file helps you navigate the refactoring documentation.
 Use [MIGRATION_CHECKLIST.md](./MIGRATION_CHECKLIST.md#code-review-questions) Code Review Questions section
 
 Questions to ask:
+
 - Is this function doing one thing?
 - Can this be reused elsewhere?
 - Are there magic strings?
@@ -168,40 +187,52 @@ npm run format
 ## 💡 Key Concepts
 
 ### Constants
+
 All configuration in one place for easy maintenance
+
 ```javascript
 import { ROUTES, API_CONFIG } from '../constants';
 ```
 
 ### Utilities
+
 Reusable functions prevent code duplication
+
 ```javascript
 import { fetchWithRetry } from '../utils/apiClient';
 ```
 
 ### Reusable Components
+
 UI building blocks for consistency
+
 ```javascript
 import Button from '../components/common/Button';
-<Button variant="primary">Click</Button>
+<Button variant="primary">Click</Button>;
 ```
 
 ### Error Handling
+
 Multiple layers ensure reliability
+
 ```javascript
 // Global level
-<ErrorBoundary>...</ErrorBoundary>
+<ErrorBoundary>...</ErrorBoundary>;
 
 // Component level
 import ErrorMessage from '../components/common/ErrorMessage';
-{error && <ErrorMessage message={error} />}
+{
+  error && <ErrorMessage message={error} />;
+}
 
 // Utility level
 import { getErrorMessage } from '../utils/errorUtils';
 ```
 
 ### Caching
+
 Smart data management
+
 ```javascript
 import { getCachedPortfolio } from '../utils/cacheUtils';
 ```
@@ -227,16 +258,19 @@ A: Run `npm run lint` and `npm run format`
 ## 📞 Support Resources
 
 ### In Code
+
 - JSDoc comments on all functions
 - Inline comments on complex logic
 - Examples in existing implementations
 
 ### In Docs
+
 - REFACTORING.md - Comprehensive guide
 - MIGRATION_CHECKLIST.md - Team guidelines
 - README_REFACTORING.md - Quick overview
 
 ### In Project
+
 - `src/pages/Portfolio.jsx` - Example of refactored page
 - `src/components/layout/Header.jsx` - Component extraction pattern
 - `src/utils/` - Utility patterns
@@ -246,6 +280,7 @@ A: Run `npm run lint` and `npm run format`
 ## ✅ Checklist for New Features
 
 Before committing new code:
+
 - [ ] Used constants (not magic strings)?
 - [ ] Used utility functions (not duplicated code)?
 - [ ] Used reusable components?

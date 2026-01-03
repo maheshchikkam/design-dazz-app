@@ -5,8 +5,7 @@
 
 // API Configuration
 export const API_CONFIG = {
-  PORTFOLIO_URL:
-    'https://pub-20461b09c2564483b3f614a9f86ce669.r2.dev/project-details.json',
+  PORTFOLIO_URL: 'https://pub-20461b09c2564483b3f614a9f86ce669.r2.dev/project-details.json',
   TIMEOUT: 10000, // 10 seconds
   RETRY_ATTEMPTS: 3,
   RETRY_DELAY: 1000, // 1 second
