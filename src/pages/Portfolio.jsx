@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
-
-const PORTFOLIO_API_URL =
-  'https://pub-20461b09c2564483b3f614a9f86ce669.r2.dev/project-details.json';
+import { usePortfolio } from '../hooks/usePortfolio';
 
 const PortfolioCard = ({ item }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -18,6 +16,7 @@ const PortfolioCard = ({ item }) => {
     setImageLoaded(true);
     setImageError(true);
     console.error(`Failed to load image: ${item.image}`);
+    console.error('Check browser console (F12) for CORS errors');
   };
 
   return (
@@ -33,7 +32,6 @@ const PortfolioCard = ({ item }) => {
         <img
           src={item.image}
           alt={item.title}
-          loading="lazy"
           onLoad={handleImageLoad}
           onError={handleImageError}
           className={`w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ${
@@ -126,33 +124,7 @@ const ErrorMessage = ({ message, onRetry }) => (
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [portfolioItems, setPortfolioItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPortfolioData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch(PORTFOLIO_API_URL);
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch portfolio data: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        setPortfolioItems(Array.isArray(data) ? data : data.projects || []);
-      } catch (err) {
-        setError(err.message || 'Failed to load portfolio data. Please try again later.');
-        console.error('Portfolio fetch error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPortfolioData();
-  }, []);
+  const { portfolioItems, loading, error, refetch } = usePortfolio();
 
   const categories = [
     { id: 'all', label: 'All Projects' },
@@ -180,7 +152,7 @@ export default function Portfolio() {
         {/* Error State */}
         {error && (
           <div className="mb-12">
-            <ErrorMessage message={error} onRetry={() => window.location.reload()} />
+            <ErrorMessage message={error} onRetry={refetch} />
           </div>
         )}
 

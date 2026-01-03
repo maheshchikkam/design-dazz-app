@@ -4,24 +4,27 @@ import Header from './components/layout/Header';
 import ScrollToTop from './components/common/ScrollToTop';
 import Footer from './components/layout/Footer';
 import { routes } from './routes';
+import { PortfolioProvider } from './context/PortfolioContext';
 import './assets/styles/App.css';
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <div className="flex-1">
-          <Routes>
-            {routes.map((route) => (
-              <Route key={route.path} path={route.path} element={<route.element />} />
-            ))}
-          </Routes>
+    <PortfolioProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-1">
+            <Routes>
+              {routes.map((route) => (
+                <Route key={route.path} path={route.path} element={<route.element />} />
+              ))}
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </PortfolioProvider>
   );
 }
 
