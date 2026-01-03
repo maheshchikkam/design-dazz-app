@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const ImageCarousel = ({ images = [] }) => {
+const ImageCarousel = ({ images = [], onAllLoaded }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -29,6 +29,34 @@ const ImageCarousel = ({ images = [] }) => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [goToPrevious, goToNext]);
+
+  // Preload all images and notify parent when done (either success or error)
+  useEffect(() => {
+    let mounted = true;
+    if (!onAllLoaded) return;
+    if (!images || images.length === 0) {
+      onAllLoaded();
+      return;
+    }
+
+    let loadedCount = 0;
+    images.forEach((src) => {
+      const img = new Image();
+      const done = () => {
+        loadedCount += 1;
+        if (mounted && loadedCount === images.length) {
+          onAllLoaded();
+        }
+      };
+      img.onload = done;
+      img.onerror = done;
+      img.src = src;
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [images, onAllLoaded]);
 
   if (!images || images.length === 0) {
     return (

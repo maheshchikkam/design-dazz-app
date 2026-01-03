@@ -35,6 +35,7 @@ const ProjectDetails = () => {
   const [project, setProject] = useState(passedProject || null);
   const [loading, setLoading] = useState(!passedProject);
   const [error, setError] = useState(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
     if (project) return; // already have project from navigation state
@@ -101,8 +102,23 @@ const ProjectDetails = () => {
         </div>
 
         {/* Image Carousel */}
-        <div className="mb-8">
-          <ImageCarousel images={project.allImages || [project.image]} />
+        <div className="mb-8 relative">
+          <ImageCarousel
+            images={project.allImages || (project.image ? [project.image] : [])}
+            onAllLoaded={() => setImagesLoaded(true)}
+          />
+
+          {/* Loading mask while images are preloading */}
+          {!imagesLoaded && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/60">
+              <div className="text-white text-center p-4 rounded">
+                <div className="mb-2">Loading images...</div>
+                <div className="h-2 w-48 bg-white/30 rounded overflow-hidden">
+                  <div className="h-full bg-white animate-[loading_1.5s_linear_infinite]" />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Project Info */}
