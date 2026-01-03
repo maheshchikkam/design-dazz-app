@@ -1,49 +1,158 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaExternalLinkAlt, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+
+const PORTFOLIO_API_URL =
+  'https://pub-20461b09c2564483b3f614a9f86ce669.r2.dev/project-details.json';
+
+const PortfolioCard = ({ item }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+    setImageError(false);
+  };
+
+  const handleImageError = () => {
+    setImageLoaded(true);
+    setImageError(true);
+    console.error(`Failed to load image: ${item.image}`);
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+      {/* Image Container */}
+      <div className="relative overflow-hidden">
+        {!imageLoaded && <div className="w-full h-64 bg-gray-200 animate-pulse" />}
+        {imageError && (
+          <div className="w-full h-64 bg-gray-300 flex items-center justify-center">
+            <span className="text-gray-600 text-sm text-center px-4">Image failed to load</span>
+          </div>
+        )}
+        <img
+          src={item.image}
+          alt={item.title}
+          loading="lazy"
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          className={`w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ${
+            !imageLoaded || imageError ? 'hidden' : 'block'
+          }`}
+        />
+
+        {/* Category Badge */}
+        <div className="absolute top-4 right-4">
+          <span
+            className={`px-3 py-1 rounded-full text-sm font-medium ${
+              item.category === 'residential' ? 'bg-primary text-white' : 'bg-brown text-white'
+            }`}
+          >
+            {item.category === 'residential' ? 'Residential' : 'Commercial'}
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-6">
+        <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-brown transition-colors duration-300">
+          {item.title}
+        </h3>
+
+        <p className="text-brown text-sm mb-4 line-clamp-2">{item.description}</p>
+
+        {/* Project Details */}
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center text-brown text-sm">
+            <FaMapMarkerAlt className="mr-2 text-primary" />
+            {item.location}
+          </div>
+          <div className="flex items-center text-brown text-sm">
+            <FaCalendarAlt className="mr-2 text-primary" />
+            {item.year}
+          </div>
+        </div>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {item.tags?.map((tag, index) => (
+            <span key={index} className="px-2 py-1 bg-secondary text-brown text-xs rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* View Project Button */}
+        <Link
+          to={`/portfolio/${item.id}`}
+          className="block w-full bg-primary text-white py-2 rounded-lg hover:bg-brown transition-colors duration-300 font-medium text-center"
+        >
+          View Project Details
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+const LoadingSkeletons = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {[...Array(6)].map((_, index) => (
+      <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
+        <div className="w-full h-64 bg-gray-200" />
+        <div className="p-6 space-y-4">
+          <div className="h-6 bg-gray-200 rounded w-3/4" />
+          <div className="space-y-2">
+            <div className="h-4 bg-gray-200 rounded" />
+            <div className="h-4 bg-gray-200 rounded w-5/6" />
+          </div>
+          <div className="h-10 bg-gray-200 rounded" />
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const ErrorMessage = ({ message, onRetry }) => (
+  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center">
+    <p className="mb-4">{message}</p>
+    <button
+      onClick={onRetry}
+      className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 transition-colors duration-300"
+    >
+      Retry
+    </button>
+  </div>
+);
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [portfolioItems, setPortfolioItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Sample portfolio data - replace with actual project data
-  const portfolioItems = [
-    {
-      id: 1,
-      title: 'Modern Home Design',
-      category: 'residential',
-      location: 'Marina Skies, HYD',
-      year: '2025',
-      budget: '20,000',
-      image: '/images/project-1/1.jpg',
-      description:
-        'Complete design of a 1200 sq ft living space with contemporary design elements.',
-      tags: ['Modern', 'Minimalist', 'Living Room'],
-    },
-    {
-      id: 2,
-      title: 'Nithins Room',
-      category: 'residential',
-      location: 'Banglore, KA',
-      year: '2025',
-      budget: '20,000',
-      image: '/images/project-2/1.jpg',
-      description:
-        'Complete room design of a 1200 sq ft living space with contemporary design elements.',
-      tags: ['Modern', 'Minimalist', 'Living Room'],
-    },
-    {
-      id: 3,
-      title: 'Nyla',
-      category: 'residential',
-      location: 'Hyderabad, TG',
-      year: '2025',
-      budget: '20,000',
-      image: '/images/project-3/1.jpg',
-      description:
-        'Complete room design of a 1200 sq ft living space with contemporary design elements.',
-      tags: ['Modern', 'Minimalist', 'Living Room'],
-    },
-  ];
+  useEffect(() => {
+    const fetchPortfolioData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await fetch(PORTFOLIO_API_URL);
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch portfolio data: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setPortfolioItems(Array.isArray(data) ? data : data.projects || []);
+      } catch (err) {
+        setError(err.message || 'Failed to load portfolio data. Please try again later.');
+        console.error('Portfolio fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPortfolioData();
+  }, []);
 
   const categories = [
     { id: 'all', label: 'All Projects' },
@@ -68,100 +177,47 @@ export default function Portfolio() {
           </p>
         </div>
 
+        {/* Error State */}
+        {error && (
+          <div className="mb-12">
+            <ErrorMessage message={error} onRetry={() => window.location.reload()} />
+          </div>
+        )}
+
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveFilter(category.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeFilter === category.id
-                  ? 'bg-primary text-white shadow-lg transform scale-105'
-                  : 'bg-white text-brown hover:bg-primary hover:text-white shadow-md'
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
+        {!loading && !error && (
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setActiveFilter(category.id)}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  activeFilter === category.id
+                    ? 'bg-primary text-white shadow-lg transform scale-105'
+                    : 'bg-white text-brown hover:bg-primary hover:text-white shadow-md'
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+        )}
 
-        {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredItems.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
-            >
-              {/* Image Container */}
-              <div className="relative overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+        {/* Portfolio Grid - Loading State */}
+        {loading && <LoadingSkeletons />}
 
-                {/* Category Badge */}
-                <div className="absolute top-4 right-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      item.category === 'residential'
-                        ? 'bg-primary text-white'
-                        : 'bg-brown text-white'
-                    }`}
-                  >
-                    {item.category === 'residential' ? 'Residential' : 'Commercial'}
-                  </span>
-                </div>
+        {/* Portfolio Grid - Loaded State */}
+        {!loading && !error && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item) => <PortfolioCard key={item.id} item={item} />)
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-brown text-lg">No projects found in this category.</p>
               </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-brown transition-colors duration-300">
-                  {item.title}
-                </h3>
-
-                <p className="text-brown text-sm mb-4 line-clamp-2">{item.description}</p>
-
-                {/* Project Details */}
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-brown text-sm">
-                    <FaMapMarkerAlt className="mr-2 text-primary" />
-                    {item.location}
-                  </div>
-                  <div className="flex items-center text-brown text-sm">
-                    <FaCalendarAlt className="mr-2 text-primary" />
-                    {item.year}
-                  </div>
-                  {/* <div className="flex items-center text-brown text-sm">
-                    <FaDollarSign className="mr-2 text-primary" />
-                    {item.budget}
-                  </div> */}
-                </div>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {item.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="px-2 py-1 bg-secondary text-brown text-xs rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* View Project Button */}
-                <Link
-                  to={`/portfolio/${item.id}`}
-                  className="block w-full bg-primary text-white py-2 rounded-lg hover:bg-brown transition-colors duration-300 font-medium text-center"
-                >
-                  View Project Details
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
+            )}
+          </div>
+        )}
 
         {/* Stats Section */}
         <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
