@@ -1,46 +1,96 @@
-import { createContext, useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { PortfolioContext } from './PortfolioContextDef';
+import { fetchWithRetry, normalizePortfolioData } from '../utils/apiClient';
+import {
+  getCachedPortfolio,
+  setPortfolioCache,
+  clearPortfolioCache,
+} from '../utils/cacheUtils';
+import { getErrorMessage, logError } from '../utils/errorUtils';
+import { API_CONFIG } from '../constants';
 
-export const PortfolioContext = createContext();
-
-const PORTFOLIO_API_URL =
-  'https://pub-20461b09c2564483b3f614a9f86ce669.r2.dev/project-details.json';
-
+/**
+ * PortfolioProvider Component
+ * Manages portfolio data fetching, caching, and state management
+ */
 export const PortfolioProvider = ({ children }) => {
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isCached, setIsCached] = useState(false);
 
+  /**
+   * Fetches portfolio data with caching and retry logic
+   */
   const fetchPortfolioData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(PORTFOLIO_API_URL);
 
-      if (!response.ok) {
-        throw new Error(`Failed to fetch portfolio data: ${response.statusText}`);
+      // Try to use cached data first
+      const cached = getCachedPortfolio();
+      if (cached) {
+        setPortfolioItems(cached);
+        setIsCached(true);
+        setLoading(false);
+        return;
       }
 
-      const data = await response.json();
-      setPortfolioItems(Array.isArray(data) ? data : data.projects || []);
+      // Fetch from API with retry logic
+      const data = await fetchWithRetry(API_CONFIG.PORTFOLIO_URL);
+      const normalized = normalizePortfolioData(data);
+
+      if (!Array.isArray(normalized) || normalized.length === 0) {
+        throw new Error('No portfolio data available');
+      }
+
+      setPortfolioItems(normalized);
+      setIsCached(false);
+
+      // Cache the data
+      setPortfolioCache(normalized);
     } catch (err) {
-      setError(err.message || 'Failed to load portfolio data. Please try again later.');
-      console.error('Portfolio fetch error:', err);
+      const errorMessage = getErrorMessage(err);
+      setError(errorMessage);
+      logError(err, 'PortfolioProvider.fetchPortfolioData');
+
+      // Try fallback cache even if fetch fails
+      const fallbackCache = getCachedPortfolio();
+      if (fallbackCache) {
+        setPortfolioItems(fallbackCache);
+        setIsCached(true);
+        setError(null); // Clear error if we have cached data
+      }
     } finally {
       setLoading(false);
     }
   }, []);
+
+  /**
+   * Clears portfolio cache and refetches data
+   */
+  const clearAndRefetch = useCallback(async () => {
+    clearPortfolioCache();
+    await fetchPortfolioData();
+  }, [fetchPortfolioData]);
 
   // Fetch data on component mount
   useEffect(() => {
     fetchPortfolioData();
   }, [fetchPortfolioData]);
 
-  const value = {
-    portfolioItems,
-    loading,
-    error,
-    refetch: fetchPortfolioData,
-  };
+  // Memoize context value to prevent unnecessary re-renders
+  const value = useMemo(
+    () => ({
+      portfolioItems,
+      loading,
+      error,
+      isCached,
+      refetch: fetchPortfolioData,
+      clearAndRefetch,
+    }),
+    [portfolioItems, loading, error, isCached, fetchPortfolioData, clearAndRefetch]
+  );
 
   return (
     <PortfolioContext.Provider value={value}>

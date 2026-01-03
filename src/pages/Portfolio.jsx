@@ -1,23 +1,60 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 import { usePortfolio } from '../hooks/usePortfolio';
+import LoadingSpinner from '../components/common/LoadingSpinner';
+import ErrorMessage from '../components/common/ErrorMessage';
+import SkeletonLoader from '../components/common/SkeletonLoader';
+import Button from '../components/common/Button';
+import { PROJECT_CATEGORIES, CATEGORY_LABELS, UI } from '../constants';
+import { getCategoryBadgeClass } from '../utils/classNameUtils';
 
+/**
+ * Project filter options configuration
+ */
+const FILTER_OPTIONS = [
+  { id: 'all', label: 'All Projects' },
+  { id: PROJECT_CATEGORIES.RESIDENTIAL, label: CATEGORY_LABELS.residential },
+  { id: PROJECT_CATEGORIES.COMMERCIAL, label: CATEGORY_LABELS.commercial },
+];
+
+/**
+ * Portfolio statistics configuration
+ */
+const PORTFOLIO_STATS = [
+  { value: '150+', label: 'Projects Completed' },
+  { value: '98%', label: 'Client Satisfaction' },
+  { value: '5', label: 'Years Experience' },
+  { value: '25', label: 'Awards Won' },
+];
+
+/**
+ * Design process steps configuration
+ */
+const DESIGN_PROCESS = [
+  { step: 1, title: 'Discovery', description: 'Understanding your needs, lifestyle, and design preferences' },
+  { step: 2, title: 'Design', description: 'Creating detailed plans and 3D visualizations of your space' },
+  { step: 3, title: 'Development', description: 'Sourcing materials and coordinating with contractors' },
+  { step: 4, title: 'Delivery', description: 'Final installation and styling of your transformed space' },
+];
+
+/**
+ * Portfolio Card Component
+ * Displays individual project with image, details, and interaction
+ */
 const PortfolioCard = ({ item }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const handleImageLoad = () => {
+  const handleImageLoad = useCallback(() => {
     setImageLoaded(true);
     setImageError(false);
-  };
+  }, []);
 
-  const handleImageError = () => {
+  const handleImageError = useCallback(() => {
     setImageLoaded(true);
     setImageError(true);
-    console.error(`Failed to load image: ${item.image}`);
-    console.error('Check browser console (F12) for CORS errors');
-  };
+  }, []);
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
@@ -37,16 +74,13 @@ const PortfolioCard = ({ item }) => {
           className={`w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ${
             !imageLoaded || imageError ? 'hidden' : 'block'
           }`}
+          loading="lazy"
         />
 
         {/* Category Badge */}
         <div className="absolute top-4 right-4">
-          <span
-            className={`px-3 py-1 rounded-full text-sm font-medium ${
-              item.category === 'residential' ? 'bg-primary text-white' : 'bg-brown text-white'
-            }`}
-          >
-            {item.category === 'residential' ? 'Residential' : 'Commercial'}
+          <span className={getCategoryBadgeClass(item.category)}>
+            {CATEGORY_LABELS[item.category] || item.category}
           </span>
         </div>
       </div>
@@ -72,13 +106,15 @@ const PortfolioCard = ({ item }) => {
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {item.tags?.map((tag, index) => (
-            <span key={index} className="px-2 py-1 bg-secondary text-brown text-xs rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
+        {item.tags && item.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {item.tags.map((tag, index) => (
+              <span key={index} className="px-2 py-1 bg-secondary text-brown text-xs rounded-full">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* View Project Button */}
         <Link
@@ -93,50 +129,100 @@ const PortfolioCard = ({ item }) => {
   );
 };
 
-const LoadingSkeletons = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {[...Array(6)].map((_, index) => (
-      <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden animate-pulse">
-        <div className="w-full h-64 bg-gray-200" />
-        <div className="p-6 space-y-4">
-          <div className="h-6 bg-gray-200 rounded w-3/4" />
-          <div className="space-y-2">
-            <div className="h-4 bg-gray-200 rounded" />
-            <div className="h-4 bg-gray-200 rounded w-5/6" />
-          </div>
-          <div className="h-10 bg-gray-200 rounded" />
+/**
+ * Filter Button Component
+ */
+const FilterButton = ({ option, isActive, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+      isActive
+        ? 'bg-primary text-white shadow-lg transform scale-105'
+        : 'bg-white text-brown hover:bg-primary hover:text-white shadow-md'
+    }`}
+    aria-pressed={isActive}
+  >
+    {option.label}
+  </button>
+);
+
+/**
+ * Stats Section Component
+ */
+const StatsSection = () => (
+  <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
+    <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-8">
+      Our Impact in Numbers
+    </h2>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {PORTFOLIO_STATS.map((stat, index) => (
+        <div key={index} className="text-center">
+          <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</div>
+          <div className="text-brown font-medium">{stat.label}</div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 );
 
-const ErrorMessage = ({ message, onRetry }) => (
-  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg text-center">
-    <p className="mb-4">{message}</p>
-    <button
-      onClick={onRetry}
-      className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 transition-colors duration-300"
-    >
-      Retry
-    </button>
+/**
+ * Call to Action Section Component
+ */
+const CTASection = () => (
+  <div className="mt-16 text-center">
+    <div className="bg-primary text-white p-8 md:p-12 rounded-lg">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
+      <p className="text-lg mb-6 opacity-90">
+        Let's create something extraordinary together. Get in touch to discuss your vision.
+      </p>
+      <Button variant="secondary" className="text-primary font-semibold">
+        Start Your Project
+      </Button>
+    </div>
   </div>
 );
 
+/**
+ * Design Process Section Component
+ */
+const ProcessSection = () => (
+  <div className="mt-16">
+    <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-8">
+      Our Design Process
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      {DESIGN_PROCESS.map((process) => (
+        <div key={process.step} className="text-center">
+          <div className="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+            {process.step}
+          </div>
+          <h3 className="font-bold text-brown mb-2">{process.title}</h3>
+          <p className="text-brown text-sm">{process.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+/**
+ * Portfolio Page
+ * Main portfolio page component with filtering, loading, and error states
+ */
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
   const { portfolioItems, loading, error, refetch } = usePortfolio();
 
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'residential', label: 'Residential' },
-    { id: 'commercial', label: 'Commercial' },
-  ];
+  // Filter items based on active filter
+  const filteredItems = useMemo(() => {
+    if (activeFilter === 'all') {
+      return portfolioItems;
+    }
+    return portfolioItems.filter((item) => item.category === activeFilter);
+  }, [portfolioItems, activeFilter]);
 
-  const filteredItems =
-    activeFilter === 'all'
-      ? portfolioItems
-      : portfolioItems.filter((item) => item.category === activeFilter);
+  const handleFilterChange = useCallback((filterId) => {
+    setActiveFilter(filterId);
+  }, []);
 
   return (
     <div className="min-h-screen bg-secondary">
@@ -160,30 +246,27 @@ export default function Portfolio() {
         {/* Filter Buttons */}
         {!loading && !error && (
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveFilter(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeFilter === category.id
-                    ? 'bg-primary text-white shadow-lg transform scale-105'
-                    : 'bg-white text-brown hover:bg-primary hover:text-white shadow-md'
-                }`}
-              >
-                {category.label}
-              </button>
+            {FILTER_OPTIONS.map((option) => (
+              <FilterButton
+                key={option.id}
+                option={option}
+                isActive={activeFilter === option.id}
+                onClick={() => handleFilterChange(option.id)}
+              />
             ))}
           </div>
         )}
 
         {/* Portfolio Grid - Loading State */}
-        {loading && <LoadingSkeletons />}
+        {loading && <SkeletonLoader count={UI.SKELETON_COUNT} columns={3} />}
 
         {/* Portfolio Grid - Loaded State */}
         {!loading && !error && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredItems.length > 0 ? (
-              filteredItems.map((item) => <PortfolioCard key={item.id} item={item} />)
+              filteredItems.map((item) => (
+                <PortfolioCard key={item.id} item={item} />
+              ))
             ) : (
               <div className="col-span-full text-center py-12">
                 <p className="text-brown text-lg">No projects found in this category.</p>
@@ -193,87 +276,13 @@ export default function Portfolio() {
         )}
 
         {/* Stats Section */}
-        <div className="mt-16 bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-8">
-            Our Impact in Numbers
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">150+</div>
-              <div className="text-brown font-medium">Projects Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">98%</div>
-              <div className="text-brown font-medium">Client Satisfaction</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">5</div>
-              <div className="text-brown font-medium">Years Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">25</div>
-              <div className="text-brown font-medium">Awards Won</div>
-            </div>
-          </div>
-        </div>
+        <StatsSection />
 
         {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <div className="bg-primary text-white p-8 md:p-12 rounded-lg">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
-            <p className="text-lg mb-6 opacity-90">
-              Let's create something extraordinary together. Get in touch to discuss your vision.
-            </p>
-            <button className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition-colors duration-300">
-              Start Your Project
-            </button>
-          </div>
-        </div>
+        <CTASection />
 
-        {/* Process Section */}
-        <div className="mt-16">
-          <h2 className="text-2xl md:text-3xl font-bold text-primary text-center mb-8">
-            Our Design Process
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                1
-              </div>
-              <h3 className="font-bold text-brown mb-2">Discovery</h3>
-              <p className="text-brown text-sm">
-                Understanding your needs, lifestyle, and design preferences
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                2
-              </div>
-              <h3 className="font-bold text-brown mb-2">Design</h3>
-              <p className="text-brown text-sm">
-                Creating detailed plans and 3D visualizations of your space
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                3
-              </div>
-              <h3 className="font-bold text-brown mb-2">Development</h3>
-              <p className="text-brown text-sm">
-                Sourcing materials and coordinating with contractors
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                4
-              </div>
-              <h3 className="font-bold text-brown mb-2">Delivery</h3>
-              <p className="text-brown text-sm">
-                Final installation and styling of your transformed space
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* Design Process */}
+        <ProcessSection />
       </div>
     </div>
   );

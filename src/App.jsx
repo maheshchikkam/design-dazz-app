@@ -3,28 +3,35 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import ScrollToTop from './components/common/ScrollToTop';
 import Footer from './components/layout/Footer';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import { routes } from './routes';
 import { PortfolioProvider } from './context/PortfolioContext';
 import './assets/styles/App.css';
 
+/**
+ * App Component
+ * Main application component with ErrorBoundary, routing, and provider setup
+ */
 function App() {
   return (
-    <PortfolioProvider>
-      <Router>
-        <ScrollToTop />
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <div className="flex-1">
-            <Routes>
-              {routes.map((route) => (
-                <Route key={route.path} path={route.path} element={<route.element />} />
-              ))}
-            </Routes>
+    <ErrorBoundary>
+      <PortfolioProvider>
+        <Router>
+          <ScrollToTop />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1">
+              <Routes>
+                {routes.map((route) => (
+                  <Route key={route.path} path={route.path} element={<route.element />} />
+                ))}
+              </Routes>
+            </main>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </Router>
-    </PortfolioProvider>
+        </Router>
+      </PortfolioProvider>
+    </ErrorBoundary>
   );
 }
 

@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import ImageCarousel from '../components/features/ImageCarousel';
 import ProjectInfo from '../components/features/ProjectInfo';
 import ProjectTags from '../components/features/ProjectTags';
+import LoadingSpinner from '../components/common/LoadingSpinner';
+import ErrorMessage from '../components/common/ErrorMessage';
+import Button from '../components/common/Button';
+import { fetchWithRetry, findProjectById, normalizePortfolioData } from '../utils/apiClient';
+import { API_CONFIG, ROUTES } from '../constants';
+import { logError } from '../utils/errorUtils';
 
-const PORTFOLIO_API_URL =
-  'https://pub-20461b09c2564483b3f614a9f86ce669.r2.dev/project-details.json';
-
+/**
+ * Loading Fallback Component
+ * Skeleton loader for project details
+ */
 const LoadingFallback = () => (
   <div className="animate-pulse space-y-6">
     <div className="h-96 bg-gray-200 rounded-lg" />
@@ -15,18 +22,54 @@ const LoadingFallback = () => (
   </div>
 );
 
-const ErrorState = ({ message, onRetry }) => (
-  <div className="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg text-center">
-    <p className="mb-4">{message}</p>
+/**
+ * Project Header Component
+ */
+const ProjectHeader = ({ title, onBack }) => (
+  <div className="flex flex-col items-start gap-1 mb-8">
     <button
-      onClick={onRetry}
-      className="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-800 transition-colors duration-300"
+      onClick={onBack}
+      className="text-primary underline text-base hover:text-primary/80 transition-colors"
     >
-      Retry
+      &larr; Back to Portfolio
     </button>
+    <h1 className="text-4xl md:text-5xl font-bold text-primary mt-2">{title}</h1>
   </div>
 );
 
+/**
+ * Project Description Component
+ */
+const ProjectDescription = ({ description }) => (
+  <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+    <h2 className="text-2xl font-bold text-primary mb-4">Project Description</h2>
+    <p className="text-gray-700 text-lg leading-relaxed">{description}</p>
+  </div>
+);
+
+/**
+ * CTA Section Component
+ */
+const ProjectCTASection = () => (
+  <div className="bg-primary text-white p-8 rounded-lg text-center">
+    <h2 className="text-2xl font-bold mb-4">Interested in This Project Style?</h2>
+    <p className="text-lg mb-6 opacity-90">
+      Let's create something similar for your space. Get in touch with our design team.
+    </p>
+    <Link
+      to={ROUTES.CONTACT}
+      className="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition-colors duration-300"
+    >
+      Start Your Project
+    </Link>
+  </div>
+);
+
+/**
+ * ProjectDetails Page Component
+ * Displays detailed information about a selected project
+ * Supports both navigation state and direct URL access with fallback fetching
+ */
 const ProjectDetails = () => {
   const { projectId } = useParams();
   const location = useLocation();
@@ -37,30 +80,45 @@ const ProjectDetails = () => {
   const [error, setError] = useState(null);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  useEffect(() => {
-    if (project) return; // already have project from navigation state
+  /**
+   * Fetches project from API if not available from navigation state
+   */
+  const fetchProjectData = useCallback(async () => {
+    if (project) return;
 
-    const fetchProject = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const res = await fetch(PORTFOLIO_API_URL);
-        if (!res.ok) throw new Error(`Failed to fetch projects: ${res.statusText}`);
-        const projects = await res.json();
-        const found = projects.find((p) => p.id === Number(projectId));
-        if (!found) throw new Error('Project not found');
-        setProject(found);
-      } catch (err) {
-        console.error('ProjectDetails fetch error:', err);
-        setError(err.message || 'Failed to load project');
-      } finally {
-        setLoading(false);
+    try {
+      setLoading(true);
+      setError(null);
+
+      const data = await fetchWithRetry(API_CONFIG.PORTFOLIO_URL);
+      const projects = normalizePortfolioData(data);
+      const found = findProjectById(projects, projectId);
+
+      if (!found) {
+        throw new Error('Project not found');
       }
-    };
 
-    fetchProject();
+      setProject(found);
+    } catch (err) {
+      const errorMessage = err.message || 'Failed to load project details';
+      setError(errorMessage);
+      logError(err, 'ProjectDetails.fetchProjectData');
+    } finally {
+      setLoading(false);
+    }
   }, [projectId, project]);
 
+  // Fetch project on mount if not already loaded
+  useEffect(() => {
+    fetchProjectData();
+  }, [fetchProjectData]);
+
+  const handleRetry = useCallback(() => {
+    setProject(null);
+    fetchProjectData();
+  }, [fetchProjectData]);
+
+  // Loading State
   if (loading) {
     return (
       <div className="bg-secondary min-h-screen w-full">
@@ -71,35 +129,29 @@ const ProjectDetails = () => {
     );
   }
 
+  // Error State
   if (error || !project) {
     return (
       <div className="bg-secondary min-h-screen w-full">
         <div className="max-w-4xl mx-auto p-6">
-          <Link to="/portfolio" className="text-primary underline text-base mb-4 inline-block">
+          <Link to={ROUTES.PORTFOLIO} className="text-primary underline text-base mb-4 inline-block">
             &larr; Back to Portfolio
           </Link>
-          <ErrorState
+          <ErrorMessage
             message={error || 'Project not found'}
-            onRetry={() => window.location.reload()}
+            onRetry={handleRetry}
           />
         </div>
       </div>
     );
   }
 
+  // Success State
   return (
     <div className="bg-secondary min-h-screen w-full">
       <div className="max-w-4xl mx-auto p-6">
         {/* Header */}
-        <div className="flex flex-col items-start gap-1 mb-8">
-          <Link
-            to="/portfolio"
-            className="text-primary underline text-base hover:text-primary/80 transition-colors"
-          >
-            &larr; Back to Portfolio
-          </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mt-2">{project.title}</h1>
-        </div>
+        <ProjectHeader title={project.title} onBack={() => window.history.back()} />
 
         {/* Image Carousel */}
         <div className="mb-8 relative">
@@ -122,19 +174,18 @@ const ProjectDetails = () => {
         </div>
 
         {/* Project Info */}
-        <div className="mb-8">
-          <ProjectInfo
-            location={project.location}
-            category={project.category}
-            year={project.year}
-          />
-        </div>
+        {project.location && project.category && project.year && (
+          <div className="mb-8">
+            <ProjectInfo
+              location={project.location}
+              category={project.category}
+              year={project.year}
+            />
+          </div>
+        )}
 
         {/* Description */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h2 className="text-2xl font-bold text-primary mb-4">Project Description</h2>
-          <p className="text-gray-700 text-lg leading-relaxed">{project.description}</p>
-        </div>
+        {project.description && <ProjectDescription description={project.description} />}
 
         {/* Tags */}
         {project.tags && project.tags.length > 0 && (
@@ -144,18 +195,7 @@ const ProjectDetails = () => {
         )}
 
         {/* Call to Action */}
-        <div className="bg-primary text-white p-8 rounded-lg text-center">
-          <h2 className="text-2xl font-bold mb-4">Interested in This Project Style?</h2>
-          <p className="text-lg mb-6 opacity-90">
-            Let's create something similar for your space. Get in touch with our design team.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition-colors duration-300"
-          >
-            Start Your Project
-          </Link>
-        </div>
+        <ProjectCTASection />
       </div>
     </div>
   );
