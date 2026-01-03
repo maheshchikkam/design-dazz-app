@@ -83,6 +83,7 @@ const PortfolioCard = ({ item }) => {
         {/* View Project Button */}
         <Link
           to={`/portfolio/${item.id}`}
+          state={{ project: item }}
           className="block w-full bg-primary text-white py-2 rounded-lg hover:bg-brown transition-colors duration-300 font-medium text-center"
         >
           View Project Details
