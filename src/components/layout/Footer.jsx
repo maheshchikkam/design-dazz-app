@@ -48,7 +48,8 @@ export default function Footer() {
               <FaLinkedin className="text-white text-lg" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/design.dazz"
+              target="_blank"
               className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
               aria-label="Instagram"
             >

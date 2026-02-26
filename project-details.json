@@ -1,14 +1,19 @@
 [
   {
     "id": 1,
-    "title": "Modern Home Design",
+    "title": "Rainbow Vistas Sapphire",
     "category": "residential",
-    "location": "Marina Skies, HYD",
+    "location": "Kukatpally, HYD",
     "year": "2025",
     "budget": "20,000",
+    "sft": "2000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/1.jpg",
-    "description": "Complete design of a 1200 sq ft living space with contemporary design elements.",
-    "tags": ["Modern", "Minimalist", "Living Room"],
+    "description": "This 3BHK at Rainbow Vistas Sapphire Rock Garden showcases refined interiors with a balanced mix of comfort and sophistication.",
+    "tags": [
+      "Modern",
+      "Minimalist",
+      "Living Room"
+    ],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/1.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/2.jpg",
@@ -43,7 +48,11 @@
     "budget": "20,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-2/2.jpg",
     "description": "Complete room design of a 1200 sq ft living space with contemporary design elements.",
-    "tags": ["Modern", "Minimalist", "Living Room"],
+    "tags": [
+      "Modern",
+      "Minimalist",
+      "Living Room"
+    ],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-2/1.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-2/2.jpg",
@@ -66,7 +75,11 @@
     "budget": "15,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/01.jpg",
     "description": "Complete house design of a 1200 sq ft living space with contemporary design elements.",
-    "tags": ["Modern", "Minimalist", "Living Room"],
+    "tags": [
+      "Modern",
+      "Minimalist",
+      "Living Room"
+    ],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/01.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/02.jpg",
@@ -78,6 +91,62 @@
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/08.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/09.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/10.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Attapur House",
+    "category": "residential",
+    "location": "Hyderabad, TG",
+    "year": "2025",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/01.jpg",
+    "description": "Complete house design of a 1200 sq ft living space with contemporary design elements.",
+    "tags": [
+      "Modern",
+      "Minimalist",
+      "Living Room"
+    ],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/01.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/02.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/03.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/04.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/05.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/06.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/07.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/08.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Saravani Constructions",
+    "category": "residential",
+    "location": "Gandhi Nagar, Secunderabad",
+    "year": "2025",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/01.jpg",
+    "description": "A thoughtfully designed 3BHK featuring a consistent wood and beige laminate palette across all rooms for a seamless visual flow.",
+    "tags": [
+      "Modern",
+      "Minimalist",
+      "Living Room"
+    ],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/01.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/03.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/04.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/05.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/06.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/07.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/08.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/09.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/10.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/11.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/12.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/13.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/14.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/15.jpg"
     ]
   }
 ]
