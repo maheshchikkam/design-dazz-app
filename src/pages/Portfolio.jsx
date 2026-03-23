@@ -207,7 +207,7 @@ export default function Portfolio() {
               <div className="text-brown font-medium">Client Satisfaction</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">6</div>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">3</div>
               <div className="text-brown font-medium">Years Experience</div>
             </div>
           </div>
