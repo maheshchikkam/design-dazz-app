@@ -7,7 +7,7 @@
     "year": "2025",
     "budget": "20,000",
     "sft": "2000",
-    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/1.jpg",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/15.jpg",
     "description": "This 3BHK at Rainbow Vistas Sapphire Rock Garden showcases refined interiors with a balanced mix of comfort and sophistication.",
     "tags": [
       "Modern",
@@ -147,6 +147,61 @@
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/13.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/14.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/15.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Lansum Eldarado",
+    "category": "residential",
+    "location": "Narsingh, Hyderabad",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/1.jpg",
+    "description": "A beautifully designed 3BHK home that blends minimumal work with lot of functionality for rental purpose.",
+    "tags": [
+      "Modern",
+      "Minimalist",
+      "Living Room"
+    ],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/1.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/2.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/3.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/4.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/5.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/6.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/7.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/8.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/9.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/10.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/11.jpg"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Hallmark Skyrene",
+    "category": "residential",
+    "location": "Narsingh, Hyderabad",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/1.jpg",
+    "description": "A beautifully designed 3BHK home that blends minimumal work with lot of functionality.",
+    "tags": [
+      "Modern",
+      "Minimalist",
+      "Living Room"
+    ],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/1.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/2.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/3.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/4.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/5.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/6.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/7.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/8.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/9.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/10.jpg"
     ]
   }
 ]
