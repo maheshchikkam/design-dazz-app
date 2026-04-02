@@ -127,6 +127,7 @@ const ProjectDetails = () => {
             location={project.location}
             category={project.category}
             year={project.year}
+            budget={project.budget}
           />
         </div>
 
