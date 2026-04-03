@@ -15,10 +15,10 @@ const ProjectInfo = ({ location, category, year, budget }) => (
       <div className="flex items-center mb-2">
         <span className="font-semibold">Year:</span>&nbsp;{year}
       </div>
-      <div className="flex items-center mb-2">
+      {/* <div className="flex items-center mb-2">
         <span className="font-semibold">Budget:</span>&nbsp;
         {budget}
-      </div>
+      </div> */}
     </div>
   </div>
 );
