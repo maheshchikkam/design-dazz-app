@@ -9,11 +9,7 @@
     "sft": "2000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/15.jpg",
     "description": "This 3BHK at Rainbow Vistas Sapphire Rock Garden showcases refined interiors with a balanced mix of comfort and sophistication.",
-    "tags": [
-      "Modern",
-      "Minimalist",
-      "Living Room"
-    ],
+    "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/1.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-1/2.jpg",
@@ -48,11 +44,7 @@
     "budget": "20,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-2/2.jpg",
     "description": "Complete room design of a 1200 sq ft living space with contemporary design elements.",
-    "tags": [
-      "Modern",
-      "Minimalist",
-      "Living Room"
-    ],
+    "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-2/1.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-2/2.jpg",
@@ -75,11 +67,7 @@
     "budget": "15,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/01.jpg",
     "description": "Complete house design of a 1200 sq ft living space with contemporary design elements.",
-    "tags": [
-      "Modern",
-      "Minimalist",
-      "Living Room"
-    ],
+    "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/01.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-3/02.jpg",
@@ -102,11 +90,7 @@
     "budget": "15,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/01.jpg",
     "description": "Complete house design of a 1200 sq ft living space with contemporary design elements.",
-    "tags": [
-      "Modern",
-      "Minimalist",
-      "Living Room"
-    ],
+    "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/01.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-4/Athapur/02.jpg",
@@ -127,11 +111,7 @@
     "budget": "15,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/01.jpg",
     "description": "A thoughtfully designed 3BHK featuring a consistent wood and beige laminate palette across all rooms for a seamless visual flow.",
-    "tags": [
-      "Modern",
-      "Minimalist",
-      "Living Room"
-    ],
+    "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/01.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-5/03.jpg",
@@ -158,11 +138,7 @@
     "budget": "15,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/1.jpg",
     "description": "A beautifully designed 3BHK home that blends minimumal work with lot of functionality for rental purpose.",
-    "tags": [
-      "Modern",
-      "Minimalist",
-      "Living Room"
-    ],
+    "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/1.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-6/2.jpg",
@@ -186,11 +162,7 @@
     "budget": "15,000",
     "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/1.jpg",
     "description": "A beautifully designed 3BHK home that blends minimumal work with lot of functionality.",
-    "tags": [
-      "Modern",
-      "Minimalist",
-      "Living Room"
-    ],
+    "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/1.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/2.jpg",
@@ -202,6 +174,83 @@
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/8.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/9.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-7/10.jpg"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Aparna Zenon",
+    "category": "residential",
+    "location": "Narsingh, Hyderabad",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/01.jpg",
+    "description": "A beautifully designed 3BHK home that blends minimumal work with lot of functionality for rental purpose.",
+    "tags": ["Modern", "Minimalist", "Living Room"],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/01.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/02.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/03.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/04.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/05.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/06.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/07.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/08.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/09.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/10.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/11.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-8/12.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Standalone Project",
+    "category": "residential",
+    "location": "Chikkadapally, Hyderabad",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/01.jpg",
+    "description": "A home that is designed in such a way that reflects the tradition, warmth, and soulful living that purely reflects their living.",
+    "tags": ["Modern", "Minimalist", "Living Room"],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/01.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/02.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/03.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/04.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/05.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/06.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/07.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/08.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/09.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/10.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/11.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/12.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-9/13.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "NYLA B Block 1909",
+    "category": "residential",
+    "location": "Miyapur, Hyderabad",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/01.jpeg",
+    "description": "A cozy 3BHK designed to feel like home in every corner which blends modern aesthetics with smart space planning, detailed to enhance comfort, functionality, and elegant to everyday living.",
+    "tags": ["Modern", "Minimalist", "Living Room"],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/01.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/02.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/03.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/04.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/05.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/06.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/07.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/08.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/09.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/10.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/11.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/12.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/13.jpeg"
     ]
   }
 ]
