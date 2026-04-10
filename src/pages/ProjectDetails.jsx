@@ -47,7 +47,8 @@ const ProjectDetails = () => {
         const res = await fetch(PORTFOLIO_API_URL);
         if (!res.ok) throw new Error(`Failed to fetch projects: ${res.statusText}`);
         const projects = await res.json();
-        const found = projects.find((p) => p.id === Number(projectId));
+        const sortedProjects = projects.sort((a, b) => b.id - a.id);
+        const found = sortedProjects.find((p) => p.id === Number(projectId));
         if (!found) throw new Error('Project not found');
         setProject(found);
       } catch (err) {

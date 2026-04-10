@@ -21,7 +21,8 @@ export const PortfolioProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      setPortfolioItems(Array.isArray(data) ? data : data.projects || []);
+      const items = Array.isArray(data) ? data : data.projects || [];
+      setPortfolioItems(items.sort((a, b) => b.id - a.id));
     } catch (err) {
       setError(err.message || 'Failed to load portfolio data. Please try again later.');
       console.error('Portfolio fetch error:', err);
@@ -42,9 +43,5 @@ export const PortfolioProvider = ({ children }) => {
     refetch: fetchPortfolioData,
   };
 
-  return (
-    <PortfolioContext.Provider value={value}>
-      {children}
-    </PortfolioContext.Provider>
-  );
+  return <PortfolioContext.Provider value={value}>{children}</PortfolioContext.Provider>;
 };
