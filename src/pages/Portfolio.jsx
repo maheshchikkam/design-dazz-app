@@ -3,6 +3,27 @@ import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 import { usePortfolio } from '../hooks/usePortfolio';
 
+// Helper to generate Cloudflare optimized image URLs with width parameter
+const getCloudflareLazyUrl = (url, width) => {
+  if (!url || typeof url !== 'string') return url;
+
+  // Only add Cloudflare params to R2 URLs
+  if (!url.includes('r2.dev')) return url;
+
+  // If URL already has query params, append with &
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}format=auto&quality=80&width=${width}`;
+};
+
+// Generate srcset for responsive image serving
+const generateSrcset = (url) => {
+  return [
+    `${getCloudflareLazyUrl(url, 600)} 600w`,
+    `${getCloudflareLazyUrl(url, 1200)} 1200w`,
+    `${getCloudflareLazyUrl(url, 1920)} 1920w`,
+  ].join(', ');
+};
+
 const PortfolioCard = ({ item }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -30,7 +51,9 @@ const PortfolioCard = ({ item }) => {
           </div>
         )}
         <img
-          src={item.image}
+          src={getCloudflareLazyUrl(item.image, 1920)}
+          srcSet={generateSrcset(item.image)}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           alt={item.title}
           onLoad={handleImageLoad}
           onError={handleImageError}

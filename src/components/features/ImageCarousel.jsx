@@ -1,9 +1,32 @@
 import { useState, useEffect, useCallback } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
+// Helper to generate Cloudflare optimized image URLs with width parameter
+const getCloudflareLazyUrl = (url, width) => {
+  if (!url || typeof url !== 'string') return url;
+
+  // Only add Cloudflare params to R2 URLs
+  if (!url.includes('r2.dev')) return url;
+
+  // If URL already has query params, append with &
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}format=auto&quality=80&width=${width}`;
+};
+
+// Generate srcset for responsive image serving
+const generateSrcset = (url) => {
+  return [
+    `${getCloudflareLazyUrl(url, 600)} 600w`,
+    `${getCloudflareLazyUrl(url, 1200)} 1200w`,
+    `${getCloudflareLazyUrl(url, 1920)} 1920w`,
+  ].join(', ');
+};
+
 const ImageCarousel = ({ images = [], onAllLoaded }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [nextImageLoaded, setNextImageLoaded] = useState(false);
+  const [prevImageLoaded, setPrevImageLoaded] = useState(false);
 
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -30,33 +53,47 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [goToPrevious, goToNext]);
 
-  // Preload all images and notify parent when done (either success or error)
+  // Lazy load only current, next, and previous images for better mobile performance
   useEffect(() => {
     let mounted = true;
-    if (!onAllLoaded) return;
-    if (!images || images.length === 0) {
-      onAllLoaded();
+
+    // Immediately call onAllLoaded if no callback (for backward compatibility)
+    if (!onAllLoaded || !images || images.length === 0) {
+      if (onAllLoaded) onAllLoaded();
       return;
     }
 
-    let loadedCount = 0;
-    images.forEach((src) => {
-      const img = new Image();
-      const done = () => {
-        loadedCount += 1;
-        if (mounted && loadedCount === images.length) {
-          onAllLoaded();
-        }
-      };
-      img.onload = done;
-      img.onerror = done;
-      img.src = src;
-    });
+    // For backward compatibility, simulate "all loaded" by checking current image
+    const currentImg = new Image();
+    currentImg.onload = () => {
+      if (mounted) onAllLoaded();
+    };
+    currentImg.onerror = () => {
+      if (mounted) onAllLoaded();
+    };
+    currentImg.src = images[currentIndex];
 
     return () => {
       mounted = false;
     };
-  }, [images, onAllLoaded]);
+  }, [currentIndex, images, onAllLoaded]);
+
+  // Preload next and previous images in background (non-blocking)
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+
+    const loadImage = (src) => {
+      const img = new Image();
+      img.src = src;
+    };
+
+    // Preload next and previous images asynchronously
+    if (images.length > 1) {
+      loadImage(images[nextIndex]);
+      loadImage(images[prevIndex]);
+    }
+  }, [currentIndex, images]);
 
   if (!images || images.length === 0) {
     return (
@@ -71,12 +108,23 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
   return (
     <div className="w-full space-y-4">
       <div className="relative bg-black rounded-lg overflow-hidden">
-        {!imageLoaded && <div className="absolute inset-0 bg-gray-300 animate-pulse z-10" />}
+        {/* Blur-up placeholder while loading */}
+        {!imageLoaded && (
+          <div
+            className="absolute inset-0 bg-gray-400 animate-pulse z-10"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f3f4f6' width='400' height='300'/%3E%3C/svg%3E")`,
+            }}
+          />
+        )}
+
         <img
-          src={currentImage}
+          src={getCloudflareLazyUrl(currentImage, 1920)}
+          srcSet={generateSrcset(currentImage)}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           alt={`Project image ${currentIndex + 1}`}
           onLoad={() => setImageLoaded(true)}
-          className={`w-full h-96 object-cover transition-opacity duration-300 ${
+          className={`w-full h-96 object-cover transition-opacity duration-500 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -121,7 +169,8 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
               aria-label={`Go to image ${index + 1}`}
             >
               <img
-                src={image}
+                src={getCloudflareLazyUrl(image, 160)}
+                srcSet={`${getCloudflareLazyUrl(image, 160)} 1x, ${getCloudflareLazyUrl(image, 320)} 2x`}
                 alt={`Thumbnail ${index + 1}`}
                 className="w-full h-full object-cover"
                 loading="lazy"
