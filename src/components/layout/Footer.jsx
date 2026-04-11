@@ -39,14 +39,7 @@ export default function Footer() {
         {/* Social Links */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <p className="font-semibold">Follow Us</p>
-          <div className="flex gap-4">
-            <a
-              href="#"
-              className="bg-primary p-3 rounded-full hover:bg-brown transition-colors duration-300"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="text-white text-lg" />
-            </a>
+          <div className="flex flex-row items-center gap-4">
             <a
               href="https://www.instagram.com/design.dazz"
               target="_blank"
