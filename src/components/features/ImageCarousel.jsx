@@ -76,7 +76,9 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
           src={currentImage}
           alt={`Project image ${currentIndex + 1}`}
           onLoad={() => setImageLoaded(true)}
-          className={`w-full h-96 object-cover transition-opacity duration-300 ${
+          onContextMenu={(e) => e.preventDefault()}
+          draggable="false"
+          className={`w-full h-96 object-cover select-none transition-opacity duration-300 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -123,7 +125,9 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
               <img
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover select-none"
+                onContextMenu={(e) => e.preventDefault()}
+                draggable="false"
                 loading="lazy"
               />
             </button>
