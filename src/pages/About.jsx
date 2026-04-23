@@ -5,10 +5,10 @@ export default function About() {
         <div className="text-center mb-16 flex flex-col items-center">
           <img
             src="/founder.jpeg"
-            alt="Sai Sandhya Puppala"
+            alt="Sandhya Puppala"
             className="w-80 h-[40rem] md:w-[32rem] md:h-[60rem] rounded-2xl object-cover object-top shadow-2xl mb-8 border-8 border-white"
           />
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3">Sai Sandhya Puppala</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3">Sandhya Puppala</h1>
           <p className="text-xl text-primary font-medium mb-6">Founder & Lead Designer</p>
           <div className="w-24 h-1 bg-primary mx-auto"></div>
         </div>

@@ -19,7 +19,7 @@ export default function Footer() {
         {/* Address Info */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <p className="font-semibold">Address</p>
-          <p>Sai Sandhya Puppala</p>
+          <p>Sandhya Puppala</p>
           <a href="tel:+1234567890" className="hover:underline">
             Miyapur, Hyderabad
           </a>

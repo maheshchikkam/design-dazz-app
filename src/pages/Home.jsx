@@ -41,14 +41,14 @@ export default function Home() {
           <div className="shrink-0">
             <img
               src="/founder-new.png"
-              alt="Sai Sandhya Puppala"
+              alt="Sandhya Puppala"
               className="w-56 h-72 md:w-64 md:h-[22rem] rounded-2xl object-cover object-top shadow-xl border-4 border-white"
             />
           </div>
 
           {/* Founder Bio */}
           <div className="text-center md:text-left max-w-2xl">
-            <h3 className="text-2xl md:text-3xl font-bold text-brown mb-2">Sai Sandhya Puppala</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-brown mb-2">Sandhya Puppala</h3>
             <p className="text-lg md:text-xl text-primary font-medium mb-6">
               Founder & Lead Interior Designer
             </p>
