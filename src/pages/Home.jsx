@@ -27,20 +27,34 @@ export default function Home() {
         </div>
       </div>
 
-      {/* About Section */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brown mb-6">About</h2>
-          <div className="w-24 h-1 bg-brown mx-auto mb-8"></div>
+      {/* Meet the Designer Section */}
+      <div className="max-w-5xl mx-auto px-6 py-12 md:py-20">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brown mb-6">Meet the Designer</h2>
+          <div className="w-24 h-1 bg-brown mx-auto"></div>
         </div>
 
-        <div className="text-center">
-          <p className="text-lg md:text-xl text-brown leading-relaxed max-w-3xl mx-auto">
-            Welcome to Design Dazz, where imagination meets innovation through the power of 3D
-            design. As a specialized interior designer, I focus exclusively on creating stunning
-            three-dimensional visualizations that transform your space before a single piece of
-            furniture is moved.
-          </p>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
+          {/* Founder Photo */}
+          <div className="shrink-0">
+            <img
+              src="/founder.jpg"
+              alt="Sai Sandhya Puppala"
+              className="w-56 h-72 md:w-64 md:h-[22rem] rounded-2xl object-cover object-top shadow-xl border-4 border-white"
+            />
+          </div>
+          
+          {/* Founder Bio */}
+          <div className="text-center md:text-left max-w-2xl">
+            <h3 className="text-2xl md:text-3xl font-bold text-brown mb-2">Sai Sandhya Puppala</h3>
+            <p className="text-lg md:text-xl text-primary font-medium mb-6">Founder & Lead Interior Designer</p>
+            <p className="text-lg md:text-xl text-brown/90 leading-relaxed">
+              Welcome to Design Dazz, where imagination meets innovation through the power of 3D
+              design. As a specialized interior designer, I focus exclusively on creating stunning
+              three-dimensional visualizations that transform your space before a single piece of
+              furniture is moved.
+            </p>
+          </div>
         </div>
       </div>
 

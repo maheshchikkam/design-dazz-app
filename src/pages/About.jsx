@@ -2,8 +2,15 @@ export default function About() {
   return (
     <div className="bg-secondary">
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6">About Design Dazz</h1>
+        <div className="text-center mb-16 flex flex-col items-center">
+          <img
+            src="/founder.jpg"
+            alt="Sai Sandhya Puppala"
+            className="w-48 h-64 rounded-2xl object-cover object-top shadow-lg mb-8 border-4 border-white"
+          />
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3">Sai Sandhya Puppala</h1>
+          <p className="text-xl text-primary font-medium mb-6">Founder & Lead Designer</p>
+          <div className="w-24 h-1 bg-primary mx-auto"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
