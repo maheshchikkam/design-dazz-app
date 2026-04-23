@@ -40,7 +40,7 @@ export default function Home() {
           {/* Founder Photo */}
           <div className="shrink-0">
             <img
-              src="/founder.jpeg"
+              src="/founder-new.png"
               alt="Sai Sandhya Puppala"
               className="w-56 h-72 md:w-64 md:h-[22rem] rounded-2xl object-cover object-top shadow-xl border-4 border-white"
             />
