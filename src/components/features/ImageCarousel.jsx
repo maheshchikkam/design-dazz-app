@@ -78,7 +78,7 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
           onLoad={() => setImageLoaded(true)}
           onContextMenu={(e) => e.preventDefault()}
           draggable="false"
-          className={`w-full h-96 object-cover select-none transition-opacity duration-300 ${
+          className={`w-full h-96 object-cover select-none pointer-events-none [-webkit-touch-callout:none] transition-opacity duration-300 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -132,7 +132,7 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
               <img
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
-                className="w-full h-full object-cover select-none"
+                className="w-full h-full object-cover select-none pointer-events-none [-webkit-touch-callout:none]"
                 onContextMenu={(e) => e.preventDefault()}
                 draggable="false"
                 loading="lazy"

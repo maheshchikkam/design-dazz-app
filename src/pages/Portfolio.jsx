@@ -36,7 +36,7 @@ const PortfolioCard = ({ item }) => {
           onError={handleImageError}
           onContextMenu={(e) => e.preventDefault()}
           draggable="false"
-          className={`w-full h-64 object-cover select-none group-hover:scale-105 transition-transform duration-300 ${
+          className={`w-full h-64 object-cover select-none pointer-events-none [-webkit-touch-callout:none] group-hover:scale-105 transition-transform duration-300 ${
             !imageLoaded || imageError ? 'hidden' : 'block'
           }`}
         />
