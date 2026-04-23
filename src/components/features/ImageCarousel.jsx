@@ -82,6 +82,13 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
+        
+        {/* CSS Watermark Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-hidden">
+          <div className="transform -rotate-45 text-white/30 font-bold text-4xl md:text-6xl tracking-widest uppercase select-none drop-shadow-md whitespace-nowrap">
+            © Design Dazz
+          </div>
+        </div>
 
         {images.length > 1 && (
           <>

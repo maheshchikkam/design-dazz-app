@@ -41,6 +41,13 @@ const PortfolioCard = ({ item }) => {
           }`}
         />
 
+        {/* CSS Watermark Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-10 transition-transform duration-300 group-hover:scale-105">
+          <div className="transform -rotate-45 text-white/30 font-bold text-3xl md:text-4xl tracking-wider uppercase select-none drop-shadow-md whitespace-nowrap">
+            © Design Dazz
+          </div>
+        </div>
+
         {/* Category Badge */}
         <div className="absolute top-4 right-4">
           <span
