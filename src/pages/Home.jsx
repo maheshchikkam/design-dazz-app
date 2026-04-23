@@ -30,7 +30,9 @@ export default function Home() {
       {/* Meet the Designer Section */}
       <div className="max-w-5xl mx-auto px-6 py-12 md:py-20">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brown mb-6">Meet the Designer</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brown mb-6">
+            Meet the Designer
+          </h2>
           <div className="w-24 h-1 bg-brown mx-auto"></div>
         </div>
 
@@ -38,16 +40,18 @@ export default function Home() {
           {/* Founder Photo */}
           <div className="shrink-0">
             <img
-              src="/founder.jpg"
+              src="/founder.jpeg"
               alt="Sai Sandhya Puppala"
               className="w-56 h-72 md:w-64 md:h-[22rem] rounded-2xl object-cover object-top shadow-xl border-4 border-white"
             />
           </div>
-          
+
           {/* Founder Bio */}
           <div className="text-center md:text-left max-w-2xl">
             <h3 className="text-2xl md:text-3xl font-bold text-brown mb-2">Sai Sandhya Puppala</h3>
-            <p className="text-lg md:text-xl text-primary font-medium mb-6">Founder & Lead Interior Designer</p>
+            <p className="text-lg md:text-xl text-primary font-medium mb-6">
+              Founder & Lead Interior Designer
+            </p>
             <p className="text-lg md:text-xl text-brown/90 leading-relaxed">
               Welcome to Design Dazz, where imagination meets innovation through the power of 3D
               design. As a specialized interior designer, I focus exclusively on creating stunning

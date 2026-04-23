@@ -4,7 +4,7 @@ export default function About() {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="text-center mb-16 flex flex-col items-center">
           <img
-            src="/founder.jpg"
+            src="/founder.jpeg"
             alt="Sai Sandhya Puppala"
             className="w-48 h-64 rounded-2xl object-cover object-top shadow-lg mb-8 border-4 border-white"
           />
