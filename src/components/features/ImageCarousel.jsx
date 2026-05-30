@@ -4,6 +4,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 const ImageCarousel = ({ images = [], onAllLoaded }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -20,10 +21,23 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
     setImageLoaded(false);
   }, []);
 
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (isLightboxOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isLightboxOpen]);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') goToPrevious();
       if (e.key === 'ArrowRight') goToNext();
+      if (e.key === 'Escape') setIsLightboxOpen(false);
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -78,7 +92,8 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
           onLoad={() => setImageLoaded(true)}
           onContextMenu={(e) => e.preventDefault()}
           draggable="false"
-          className={`max-w-full max-h-full object-contain select-none pointer-events-none [-webkit-touch-callout:none] transition-opacity duration-300 ${
+          onClick={() => setIsLightboxOpen(true)}
+          className={`max-w-full max-h-full object-contain select-none cursor-zoom-in [-webkit-touch-callout:none] transition-all duration-300 hover:scale-[1.005] hover:brightness-95 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
@@ -139,6 +154,78 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
               />
             </button>
           ))}
+        </div>
+      )}
+
+      {/* Lightbox Modal Popup */}
+      {isLightboxOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 md:p-8 backdrop-blur-sm"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-4 right-4 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 p-2.5 rounded-full transition-all duration-200 z-[60] cursor-pointer"
+            aria-label="Close fullscreen"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Navigation - Previous */}
+          {images.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrevious();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 p-3.5 rounded-full transition-all duration-200 z-[60] cursor-pointer"
+              aria-label="Previous image"
+            >
+              <FaChevronLeft size={24} />
+            </button>
+          )}
+
+          {/* Navigation - Next */}
+          {images.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white bg-black/40 hover:bg-black/60 p-3.5 rounded-full transition-all duration-200 z-[60] cursor-pointer"
+              aria-label="Next image"
+            >
+              <FaChevronRight size={24} />
+            </button>
+          )}
+
+          {/* Fullscreen Image Container */}
+          <div className="relative max-w-full max-h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={currentImage}
+              alt={`Project image ${currentIndex + 1}`}
+              className="max-w-full max-h-[85vh] md:max-h-[90vh] object-contain rounded-lg shadow-2xl select-none [-webkit-touch-callout:none]"
+              onContextMenu={(e) => e.preventDefault()}
+              draggable="false"
+            />
+
+            {/* Watermark Overlay in Fullscreen */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-hidden">
+              <div className="transform -rotate-45 text-white/20 font-bold text-5xl md:text-7xl tracking-widest uppercase select-none drop-shadow-md whitespace-nowrap">
+                © Design Dazz
+              </div>
+            </div>
+
+            {/* Image Counter */}
+            {images.length > 1 && (
+              <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium z-20">
+                {currentIndex + 1} / {images.length}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>
