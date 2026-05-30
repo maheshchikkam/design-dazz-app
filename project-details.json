@@ -252,5 +252,30 @@
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/12.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-10/13.jpeg"
     ]
+  },
+  {
+    "id": 11,
+    "title": "Hallmark Treasor",
+    "category": "residential",
+    "location": "Kompally, Hyderabad",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/1.jpeg",
+    "description": " The project is 3BHK with 1765 sqft, the client wants the design with minimal furniture that gives both aesthetic and modern look to the house ..",
+    "tags": ["Modern", "Minimalist", "Living Room"],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/1.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/2.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/3.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/4.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/5.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/6.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/7.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/8.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/9.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/10.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/11.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/12.jpeg"
+    ]
   }
 ]
