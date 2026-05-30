@@ -1,4 +1,144 @@
-@import url('https://fonts.cdnfonts.com/css/futura-lt');
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-Book.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 400;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-Oblique.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 400;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-BookOblique.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 200;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-Light.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 200;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-CondensedLight.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 200;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-LightOblique.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 200;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-CondensedLightObl.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-Condensed.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 500;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-CondensedOblique.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-ExtraBold.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-Bold.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-CondensedBold.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-CondensedExtraBold.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-ExtraBoldOblique.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-BoldOblique.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-CondExtraBoldObl.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 700;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-CondensedBoldOblique.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: normal;
+  font-weight: 800;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-Heavy.woff') format('woff');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Futura LT';
+  font-style: italic;
+  font-weight: 800;
+  src: url('https://fonts.cdnfonts.com/s/18576/FuturaLT-HeavyOblique.woff') format('woff');
+  font-display: block;
+}
+
 @import 'tailwindcss';
 
 @theme {
