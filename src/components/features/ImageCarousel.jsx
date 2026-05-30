@@ -78,11 +78,11 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
           onLoad={() => setImageLoaded(true)}
           onContextMenu={(e) => e.preventDefault()}
           draggable="false"
-          className={`w-full h-96 object-cover select-none pointer-events-none [-webkit-touch-callout:none] transition-opacity duration-300 ${
+          className={`w-full h-96 object-contain select-none pointer-events-none [-webkit-touch-callout:none] transition-opacity duration-300 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
-        
+
         {/* CSS Watermark Overlay */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-hidden">
           <div className="transform -rotate-45 text-white/30 font-bold text-4xl md:text-6xl tracking-widest uppercase select-none drop-shadow-md whitespace-nowrap">
