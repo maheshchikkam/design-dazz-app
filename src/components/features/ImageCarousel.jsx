@@ -70,7 +70,7 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
 
   return (
     <div className="w-full space-y-4">
-      <div className="relative bg-black rounded-lg overflow-hidden">
+      <div className="relative rounded-lg overflow-hidden flex items-center justify-center h-[350px] sm:h-[450px] md:h-[550px] lg:h-[600px] bg-transparent">
         {!imageLoaded && <div className="absolute inset-0 bg-gray-300 animate-pulse z-10" />}
         <img
           src={currentImage}
@@ -78,7 +78,7 @@ const ImageCarousel = ({ images = [], onAllLoaded }) => {
           onLoad={() => setImageLoaded(true)}
           onContextMenu={(e) => e.preventDefault()}
           draggable="false"
-          className={`w-full h-96 object-contain select-none pointer-events-none [-webkit-touch-callout:none] transition-opacity duration-300 ${
+          className={`max-w-full max-h-full object-contain select-none pointer-events-none [-webkit-touch-callout:none] transition-opacity duration-300 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
