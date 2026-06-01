@@ -277,5 +277,31 @@
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/11.jpeg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-11/12.jpeg"
     ]
+  },
+  {
+    "id": 12,
+    "title": "NYLA C Block 1301",
+    "category": "residential",
+    "location": "Miyapur, Hyderabad",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/01.jpeg",
+    "description": "The project is a 3BHK residence spanning 1,765 sq. ft., where the client envisions a unique identity for every space—each room offering a distinct vibe and every color creating a new experience.",
+    "tags": ["Modern", "Minimalist", "Living Room"],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/01.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/02.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/03.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/04.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/05.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/06.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/07.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/08.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/09.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/10.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/11.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/12.jpeg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-12/13.jpeg"
+    ]
   }
 ]
