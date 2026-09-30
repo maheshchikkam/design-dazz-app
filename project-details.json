@@ -433,7 +433,7 @@
     "location": "Miyapur",
     "year": "2026",
     "budget": "15,000",
-    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-18/01.jpg",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-18/02.jpg",
     "description": "A vibrant blend of colors, laminates, and styles, thoughtfully curated into one harmonious home that was beautifully refined in 3bhk - Lavender block in Greater Infra Community.",
     "tags": ["Modern", "Minimalist", "Living Room"],
     "allImages": [
@@ -459,6 +459,24 @@
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-18/20.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-18/21.jpg",
       "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-18/22.jpg"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Badangpet Elevation",
+    "category": "Elevation",
+    "location": "Balapur, Telangana",
+    "year": "2026",
+    "budget": "15,000",
+    "image": "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-19/01.jpg",
+    "description": "From structure to statement,every detail is designed with intention.",
+    "tags": ["Modern", "Minimalist", "Living Room"],
+    "allImages": [
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-19/01.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-19/02.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-19/03.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-19/04.jpg",
+      "https://pub-5021cbd9bc4f45ca93839cc25b398481.r2.dev/project-19/05.jpg"
     ]
   }
 ]
