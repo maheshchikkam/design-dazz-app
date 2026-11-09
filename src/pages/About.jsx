@@ -20,24 +20,26 @@ export default function About() {
             </h2>
 
             <p className="text-gray-600 leading-relaxed">
-              Welcome to Design Dazz, where imagination meets innovation through the power of 3D
-              design. As a specialized interior designer, I focus exclusively on creating stunning
-              three-dimensional visualizations that transform your space before a single piece of
-              furniture is moved.
+              At Design Dazz, we transform ideas into visually captivating spaces through the art of
+              3D design and visualization. As a 3D Interior and Architectural Visualizer, I
+              specialize in bringing design concepts to life through detailed, realistic, and
+              immersive visual experiences.
             </p>
 
             <p className="text-gray-600 leading-relaxed">
-              With cutting-edge 3D modeling technology, I bring your interior design dreams to
-              reality through photorealistic renderings. Every texture, lighting detail, and spatial
-              relationship is meticulously crafted to give you a complete preview of your
-              transformed space.
+              Using advanced 3D modeling and rendering techniques, I create lifelike representations
+              of residential interiors, commercial spaces, villas, and architectural elevations.
+              Every element, from material textures and color combinations to lighting and spatial
+              details, is carefully crafted to reflect the vision behind each project.
             </p>
 
             <p className="text-gray-600 leading-relaxed">
-              My passion lies in helping clients visualize the impossible and make confident design
-              decisions. From residential homes to commercial spaces, I specialize in creating
-              immersive 3D experiences that eliminate guesswork and ensure your complete
-              satisfaction with the final result.
+              My passion is to help clients see, experience, and understand their spaces before they
+              become reality. By combining creativity, precision, and functionality, I aim to make
+              every design journey clearer, more confident, and inspiring.
+              <br />
+              <br />
+              <b>At Design Dazz, we don't just visualize spaces; we bring possibilities to life.</b>
             </p>
 
             <div className="grid grid-cols-2 gap-4 mt-8">
