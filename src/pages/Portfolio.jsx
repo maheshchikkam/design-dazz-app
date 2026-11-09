@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 import { usePortfolio } from '../hooks/usePortfolio';
 
+// Cards treat every non-residential project as Commercial. Elevation projects
+// are stored under that name, so the filter has to use the same grouping.
+const getFilterCategory = (category) =>
+  String(category ?? '')
+    .trim()
+    .toLowerCase() === 'residential'
+    ? 'residential'
+    : 'commercial';
+
 const PortfolioCard = ({ item }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -52,10 +61,12 @@ const PortfolioCard = ({ item }) => {
         <div className="absolute top-4 right-4">
           <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${
-              item.category === 'residential' ? 'bg-primary text-white' : 'bg-brown text-white'
+              getFilterCategory(item.category) === 'residential'
+                ? 'bg-primary text-white'
+                : 'bg-brown text-white'
             }`}
           >
-            {item.category === 'residential' ? 'Residential' : 'Commercial'}
+            {getFilterCategory(item.category) === 'residential' ? 'Residential' : 'Commercial'}
           </span>
         </div>
       </div>
@@ -145,7 +156,7 @@ export default function Portfolio() {
   const filteredItems =
     activeFilter === 'all'
       ? portfolioItems
-      : portfolioItems.filter((item) => item.category === activeFilter);
+      : portfolioItems.filter((item) => getFilterCategory(item.category) === activeFilter);
 
   return (
     <div className="min-h-screen bg-secondary">
