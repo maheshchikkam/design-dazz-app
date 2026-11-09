@@ -447,7 +447,7 @@
   {
     "id": 16,
     "title": "Inti's Mansion",
-    "category": "commercial",
+    "category": "elevation",
     "location": "Karukuwada,Bheemavaram, A.P",
     "year": "2025",
     "budget": "15,000",
@@ -536,7 +536,7 @@
   {
     "id": 19,
     "title": "Badangpet Elevation",
-    "category": "commercial",
+    "category": "elevation",
     "location": "Balapur, Telangana",
     "year": "2026",
     "budget": "15,000",
@@ -658,7 +658,7 @@
   {
     "id": 23,
     "title": " Villa G+1",
-    "category": "residential",
+    "category": "villa",
     "location": "Bapatla, Andhra Pradesh",
     "year": "2026",
     "budget": "15,000",

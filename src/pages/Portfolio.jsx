@@ -3,14 +3,31 @@ import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 import { usePortfolio } from '../hooks/usePortfolio';
 
-// Cards treat every non-residential project as Commercial. Elevation projects
-// are stored under that name, so the filter has to use the same grouping.
-const getFilterCategory = (category) =>
-  String(category ?? '')
+const CATEGORY_LABELS = {
+  residential: 'Residential',
+  commercial: 'Commercial',
+  elevation: 'Elevation',
+  villa: 'Villa',
+};
+
+const getFilterCategory = (item) => {
+  const category = String(item?.category ?? '')
     .trim()
-    .toLowerCase() === 'residential'
-    ? 'residential'
-    : 'commercial';
+    .toLowerCase();
+  const title = String(item?.title ?? '')
+    .trim()
+    .toLowerCase();
+
+  if (category === 'elevation' || category === 'elevations' || title.includes('elevation')) {
+    return 'elevation';
+  }
+  if (category === 'villa' || category === 'villas' || title.includes('villa')) {
+    return 'villa';
+  }
+  if (category === 'commercial') return 'commercial';
+  if (category === 'residential') return 'residential';
+  return category || 'residential';
+};
 
 const PortfolioCard = ({ item }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -61,12 +78,12 @@ const PortfolioCard = ({ item }) => {
         <div className="absolute top-4 right-4">
           <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${
-              getFilterCategory(item.category) === 'residential'
+              getFilterCategory(item) === 'residential'
                 ? 'bg-primary text-white'
                 : 'bg-brown text-white'
             }`}
           >
-            {getFilterCategory(item.category) === 'residential' ? 'Residential' : 'Commercial'}
+            {CATEGORY_LABELS[getFilterCategory(item)] || 'Residential'}
           </span>
         </div>
       </div>
@@ -151,12 +168,14 @@ export default function Portfolio() {
     { id: 'all', label: 'All Projects' },
     { id: 'residential', label: 'Residential' },
     { id: 'commercial', label: 'Commercial' },
+    { id: 'elevation', label: 'Elevations' },
+    { id: 'villa', label: 'Villas' },
   ];
 
   const filteredItems =
     activeFilter === 'all'
       ? portfolioItems
-      : portfolioItems.filter((item) => getFilterCategory(item.category) === activeFilter);
+      : portfolioItems.filter((item) => getFilterCategory(item) === activeFilter);
 
   return (
     <div className="min-h-screen bg-secondary">
