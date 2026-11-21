@@ -9,7 +9,7 @@ export default function Footer() {
         {/* Logo and Address */}
         <div className="flex flex-row items-center gap-2">
           <img
-            src="/favicon-brown.svg"
+            src="/favicon.png"
             alt="Design Dazz Logo"
             loading="lazy"
             className="w-12 h-12 mb-2"

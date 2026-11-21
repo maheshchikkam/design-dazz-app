@@ -1,7 +1,7 @@
 export default function Logo({ height = 45, width = 45 }) {
   return (
     <img
-      src="/favicon.svg"
+      src="/favicon_white.png"
       alt="Logo"
       loading="lazy"
       height={height}

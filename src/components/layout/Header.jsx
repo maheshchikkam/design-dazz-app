@@ -40,8 +40,8 @@ export default function Header() {
           <NavLink to="/" className="flex flex-row">
             <Logo />
             <div className="flex flex-col items-start justify-center ml-2">
-              <span className="font-bold">DESIGN</span>
-              <span className="font-bold">DAZZ</span>
+              <span className="font-bold text-sm">DESIGN</span>
+              <span className="font-bold text-sm">DAZZ</span>
             </div>
           </NavLink>
         </div>
